@@ -1,10 +1,8 @@
 package br.com.senai.sa2semestre.fabricaveiculo.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -17,14 +15,18 @@ public class Equipamento {
     private String descricao;
     private String estado;
 
+    @OneToMany(mappedBy = "equipamento")
+    private List<Manutencao> listaDeManutencoes;
+
     public Equipamento() {
     }
 
-    public Equipamento(Long idEquipamento, String tipoEquipamento, String descricao, String estado) {
+    public Equipamento(Long idEquipamento, String tipoEquipamento, String descricao, String estado, List<Manutencao> listaDeManutencoes) {
         this.idEquipamento = idEquipamento;
         this.tipoEquipamento = tipoEquipamento;
         this.descricao = descricao;
         this.estado = estado;
+        this.listaDeManutencoes = listaDeManutencoes;
     }
 
     public Long getIdEquipamento() {
@@ -59,6 +61,14 @@ public class Equipamento {
         this.estado = estado;
     }
 
+    public List<Manutencao> getListaDeManutencoes() {
+        return listaDeManutencoes;
+    }
+
+    public void setListaDeManutencoes(List<Manutencao> listaDeManutencoes) {
+        this.listaDeManutencoes = listaDeManutencoes;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -70,7 +80,8 @@ public class Equipamento {
         if (!Objects.equals(tipoEquipamento, that.tipoEquipamento))
             return false;
         if (!Objects.equals(descricao, that.descricao)) return false;
-        return Objects.equals(estado, that.estado);
+        if (!Objects.equals(estado, that.estado)) return false;
+        return Objects.equals(listaDeManutencoes, that.listaDeManutencoes);
     }
 
     @Override
@@ -79,6 +90,7 @@ public class Equipamento {
         result = 31 * result + (tipoEquipamento != null ? tipoEquipamento.hashCode() : 0);
         result = 31 * result + (descricao != null ? descricao.hashCode() : 0);
         result = 31 * result + (estado != null ? estado.hashCode() : 0);
+        result = 31 * result + (listaDeManutencoes != null ? listaDeManutencoes.hashCode() : 0);
         return result;
     }
 
@@ -87,8 +99,9 @@ public class Equipamento {
         return "Equipamento [" +
                 "ID equipamento: " + idEquipamento +
                 ", Tipo de equipamento:" + tipoEquipamento +
-                ", Descrição: " + descricao +
+                ", Descrição do equipamento: " + descricao +
                 ", Estado do equipamento: " + estado +
+                ", Lista de manutenções: " + listaDeManutencoes +
                 ']';
     }
 }
