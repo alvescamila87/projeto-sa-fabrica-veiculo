@@ -1,4 +1,4 @@
-package br.com.senai.sa2semestre.fabricaveiculo.model;
+package br.com.senai.sa2semestre.fabricaveiculo.entities;
 
 import jakarta.persistence.*;
 

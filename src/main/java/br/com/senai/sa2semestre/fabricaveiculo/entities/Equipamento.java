@@ -1,10 +1,13 @@
-package br.com.senai.sa2semestre.fabricaveiculo.model;
+package br.com.senai.sa2semestre.fabricaveiculo.entities;
 
 import jakarta.persistence.*;
 
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Representa o equipamento
+ */
 @Entity
 public class Equipamento {
 
