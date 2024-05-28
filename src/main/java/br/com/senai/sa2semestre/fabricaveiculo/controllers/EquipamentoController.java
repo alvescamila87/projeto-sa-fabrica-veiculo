@@ -62,7 +62,7 @@ public class EquipamentoController {
     /**
      * Cria um novo equipamento.
      * @param equipamento o novo equipamento.
-     * @return o equipamento criado.
+     * @return o novo equipamento criado.
      */
     @PostMapping
     public Equipamento createEquipamento(@RequestBody Equipamento equipamento){
