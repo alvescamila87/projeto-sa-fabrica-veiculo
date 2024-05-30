@@ -63,7 +63,7 @@ public class ManutencaoController {
 
         if(manutencaoPesquisada.isPresent()){
             manutencaoParaAtualizar.setIdManutencao(id);
-            return ResponseEntity.ok(manutencaoParaAtualizar);
+            return ResponseEntity.ok(manutencaoRepository.save(manutencaoParaAtualizar));
         } else {
             return ResponseEntity.notFound().build();
         }

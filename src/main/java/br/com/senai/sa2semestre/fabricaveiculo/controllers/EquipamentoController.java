@@ -75,11 +75,13 @@ public class EquipamentoController {
      * @param equipamentoParaAtualizar os novos dados do equipamento.
      * @return o equipamento atualizado.
      */
-    @PutMapping("{id}")
-    public ResponseEntity<Equipamento> updateEquipamento(@PathVariable Long id, Equipamento equipamentoParaAtualizar){
-        Optional<Equipamento> equipamentoPesquisado = equipamentoRepository.findById(id);
 
-        if(equipamentoPesquisado.isPresent()) {
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Equipamento> updateEquipamento(@PathVariable Long id,
+                                                         @RequestBody Equipamento equipamentoParaAtualizar) {
+        Optional<Equipamento> equipamentoExistente = equipamentoRepository.findById(id);
+        if (equipamentoExistente.isPresent()) {
             equipamentoParaAtualizar.setIdEquipamento(id);
             return ResponseEntity.ok(equipamentoRepository.save(equipamentoParaAtualizar));
         } else {
