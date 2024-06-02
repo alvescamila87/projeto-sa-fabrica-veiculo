@@ -8,8 +8,9 @@ import java.util.Objects;
 @Entity
 public class Veiculo {
 
+
     @Id
-    private String chassis;
+    private String chassis; // "chassis": "9hj NFYTf5 Kg VF2808": deve ser informado
     private String modelo;
     private int anoFabricacao;
     private String cor;
