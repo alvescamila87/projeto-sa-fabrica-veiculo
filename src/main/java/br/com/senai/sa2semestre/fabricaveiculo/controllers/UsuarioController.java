@@ -16,7 +16,7 @@ import java.util.Optional;
 public class UsuarioController {
 
     @Autowired
-    public UsuarioRepository usuarioRepository;
+    private UsuarioRepository usuarioRepository;
 
     /**
      * Obtém todos os usuários.
@@ -45,7 +45,7 @@ public class UsuarioController {
 
     /**
      * Cria um novo usuário.
-     * @param usuario o novo usuário.
+     * @param usuario dados do novo usuário.
      * @return o novo usuário criado.
      */
     @PostMapping

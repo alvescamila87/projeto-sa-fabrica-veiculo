@@ -7,6 +7,9 @@ import jakarta.persistence.Id;
 
 import java.util.Objects;
 
+/**
+ * Representa o usuário de acesso
+ */
 @Entity
 public class Usuario {
 
@@ -93,9 +96,13 @@ public class Usuario {
         return result;
     }
 
+    /**
+     * Exibe todas os atributos de usuário
+     * @return Retorna uma representação em string do objeto Usuário
+     */
     @Override
     public String toString() {
-        return "Usuário [" +
+        return "USUÁRIO [" +
                 "ID usuário: " + idUsuario +
                 ", Nome: " + nome +
                 ", E-mail: " + email +

@@ -97,9 +97,13 @@ public class Equipamento {
         return result;
     }
 
+    /**
+     * Exibe todas os atributos de equipamento
+     * @return Retorna uma representação em string do objeto Equipamento
+     */
     @Override
     public String toString() {
-        return "Equipamento [" +
+        return "EQUIPAMENTO [" +
                 "ID equipamento: " + idEquipamento +
                 ", Tipo de equipamento:" + tipoEquipamento +
                 ", Descrição do equipamento: " + descricao +

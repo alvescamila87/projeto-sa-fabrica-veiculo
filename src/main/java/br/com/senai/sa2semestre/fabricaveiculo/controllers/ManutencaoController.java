@@ -14,7 +14,7 @@ import java.util.Optional;
 public class ManutencaoController {
 
     @Autowired
-    public ManutencaoRepository manutencaoRepository;
+    private ManutencaoRepository manutencaoRepository;
 
     /**
      * Obtém todas as manutenções.
@@ -43,7 +43,7 @@ public class ManutencaoController {
 
     /**
      * Cria uma nova manutenção.
-     * @param manutencao a nova manutenção.
+     * @param manutencao dados da nova manutenção.
      * @return a nova manutenção criada.
      */
     @PostMapping

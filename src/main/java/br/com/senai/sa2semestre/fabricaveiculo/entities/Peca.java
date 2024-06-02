@@ -7,6 +7,9 @@ import jakarta.persistence.Id;
 
 import java.util.Objects;
 
+/**
+ * Representa a peça
+ */
 @Entity
 public class Peca {
 
@@ -68,9 +71,13 @@ public class Peca {
         return result;
     }
 
+    /**
+     * Exibe todas os atributos de peça
+     * @return Retorna uma representação em string do objeto Peça
+     */
     @Override
     public String toString() {
-        return "Peças [" +
+        return "PEÇA [" +
                 "ID Peça: " + idPeca +
                 ", Nome: " + nome +
                 ", Descrição: " + descricao +

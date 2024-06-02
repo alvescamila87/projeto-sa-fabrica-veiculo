@@ -5,6 +5,9 @@ import jakarta.persistence.Id;
 
 import java.util.Objects;
 
+/**
+ * Representa o veículo
+ */
 @Entity
 public class Veiculo {
 
@@ -78,9 +81,13 @@ public class Veiculo {
         return result;
     }
 
+    /**
+     * Exibe todas os atributos de veículo
+     * @return Retorna uma representação em string do objeto Veículo
+     */
     @Override
     public String toString() {
-        return "Veículo [" +
+        return "VEÍCULO [" +
                 ", Chassis: " + chassis +
                 ", Modelo: " + modelo +
                 ", Ano de fabricação: " + anoFabricacao +

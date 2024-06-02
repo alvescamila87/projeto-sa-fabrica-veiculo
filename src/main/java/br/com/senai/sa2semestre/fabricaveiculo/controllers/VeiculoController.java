@@ -17,7 +17,7 @@ import java.util.Optional;
 public class VeiculoController {
 
     @Autowired
-    public VeiculoRepository veiculoRepository;
+    private VeiculoRepository veiculoRepository;
 
     /**
      * Obtém todos os veículos
@@ -46,7 +46,7 @@ public class VeiculoController {
 
     /**
      * Cria um novo veículo
-     * @param veiculo o novo veículo
+     * @param veiculo dados do novo veículo
      * @return o novo veículo criado.
      */
     @PostMapping
@@ -78,7 +78,7 @@ public class VeiculoController {
      * @return uma resposta indicando sucesso ou falha da operação
      */
     @DeleteMapping("/{chassis}")
-    public ResponseEntity<Veiculo> deleteVeiculo(@PathVariable String chassis){
+    public ResponseEntity<Void> deleteVeiculo(@PathVariable String chassis){
         Optional<Veiculo> veiculoPesquisado = veiculoRepository.findById(chassis);
 
         if(veiculoPesquisado.isPresent()){

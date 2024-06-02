@@ -5,6 +5,9 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+/**
+ * Representa a manutenção
+ */
 @Entity
 public class Manutencao {
 
@@ -108,9 +111,13 @@ public class Manutencao {
         return result;
     }
 
+    /**
+     * Exibe todas os atributos de manutenção
+     * @return Retorna uma representação em string do objeto Manutenção
+     */
     @Override
     public String toString() {
-        return "Manutenção [" +
+        return "MANUTENÇÃO [" +
                 "ID Manutenção: " + idManutencao +
                 ", Equipamento: " + equipamento +
                 ", Data início: " + dataHoraInicio +

@@ -17,7 +17,7 @@ import java.util.Optional;
 public class EquipamentoController {
 
     @Autowired
-    public EquipamentoRepository equipamentoRepository;
+    private EquipamentoRepository equipamentoRepository;
 
     /**
      * Obtém todos os equipamentos.
@@ -60,7 +60,7 @@ public class EquipamentoController {
 
     /**
      * Cria um novo equipamento.
-     * @param equipamento o novo equipamento.
+     * @param equipamento dados do novo equipamento.
      * @return o novo equipamento criado.
      */
     @PostMapping
@@ -75,10 +75,10 @@ public class EquipamentoController {
      * @return o equipamento atualizado.
      */
     @PutMapping("/{id}")
-    public ResponseEntity<Equipamento> updateEquipamento(@PathVariable Long id,
-                                                         @RequestBody Equipamento equipamentoParaAtualizar) {
-        Optional<Equipamento> equipamentoExistente = equipamentoRepository.findById(id);
-        if (equipamentoExistente.isPresent()) {
+    public ResponseEntity<Equipamento> updateEquipamento(@PathVariable Long id, @RequestBody Equipamento equipamentoParaAtualizar) {
+        Optional<Equipamento> equipamentoPesquisado = equipamentoRepository.findById(id);
+
+        if (equipamentoPesquisado.isPresent()) {
             equipamentoParaAtualizar.setIdEquipamento(id);
             return ResponseEntity.ok(equipamentoRepository.save(equipamentoParaAtualizar));
         } else {
@@ -93,10 +93,10 @@ public class EquipamentoController {
      */
     @DeleteMapping("{id}")
     public ResponseEntity<Void> deleteEquipamento(@PathVariable Long id){
-        Optional<Equipamento> equipamentoParaDeletar = equipamentoRepository.findById(id);
+        Optional<Equipamento> equipamentoPesquisado = equipamentoRepository.findById(id);
 
-        if(equipamentoParaDeletar.isPresent()){
-            equipamentoRepository.delete(equipamentoParaDeletar.get());
+        if(equipamentoPesquisado.isPresent()){
+            equipamentoRepository.delete(equipamentoPesquisado.get());
             return ResponseEntity.noContent().build();
         } else {
             return ResponseEntity.notFound().build();
