@@ -20,16 +20,16 @@ public class Veiculo {
     private int anoFabricacao;
     private String cor;
     @OneToMany(mappedBy = "veiculo_peca")
-    private List<VeiculoPeca> listaDeVeiculosPecas;
+    private List<VeiculoPeca> listaDePecasUtilizadas;
 
     public Veiculo(){}
 
-    public Veiculo(String chassis, String modelo, int anoFabricacao, String cor, List<VeiculoPeca> listaDeVeiculosPecas) {
+    public Veiculo(String chassis, String modelo, int anoFabricacao, String cor, List<VeiculoPeca> listaDePecasUtilizadas) {
         this.chassis = chassis;
         this.modelo = modelo;
         this.anoFabricacao = anoFabricacao;
         this.cor = cor;
-        this.listaDeVeiculosPecas = listaDeVeiculosPecas;
+        this.listaDePecasUtilizadas = listaDePecasUtilizadas;
     }
 
     public String getChassis() {
@@ -64,12 +64,12 @@ public class Veiculo {
         this.cor = cor;
     }
 
-    public List<VeiculoPeca> getListaDeVeiculosPecas() {
-        return listaDeVeiculosPecas;
+    public List<VeiculoPeca> getListaDePecasUtilizadas() {
+        return listaDePecasUtilizadas;
     }
 
-    public void setListaDeVeiculosPecas(List<VeiculoPeca> listaDeVeiculosPecas) {
-        this.listaDeVeiculosPecas = listaDeVeiculosPecas;
+    public void setListaDePecasUtilizadas(List<VeiculoPeca> listaDePecasUtilizadas) {
+        this.listaDePecasUtilizadas = listaDePecasUtilizadas;
     }
 
     @Override
@@ -83,7 +83,7 @@ public class Veiculo {
         if (!chassis.equals(veiculo.chassis)) return false;
         if (!Objects.equals(modelo, veiculo.modelo)) return false;
         if (!Objects.equals(cor, veiculo.cor)) return false;
-        return Objects.equals(listaDeVeiculosPecas, veiculo.listaDeVeiculosPecas);
+        return Objects.equals(listaDePecasUtilizadas, veiculo.listaDePecasUtilizadas);
     }
 
     @Override
@@ -92,7 +92,7 @@ public class Veiculo {
         result = 31 * result + (modelo != null ? modelo.hashCode() : 0);
         result = 31 * result + anoFabricacao;
         result = 31 * result + (cor != null ? cor.hashCode() : 0);
-        result = 31 * result + (listaDeVeiculosPecas != null ? listaDeVeiculosPecas.hashCode() : 0);
+        result = 31 * result + (listaDePecasUtilizadas != null ? listaDePecasUtilizadas.hashCode() : 0);
         return result;
     }
 
@@ -107,7 +107,7 @@ public class Veiculo {
                 ", Modelo: " + modelo +
                 ", Ano de fabricação: " + anoFabricacao +
                 ", Cor: " + cor +
-                ", Lista de veículo peças: " + listaDeVeiculosPecas +
+                ", Lista de peças utilizadas: " + listaDePecasUtilizadas +
                 ']';
     }
 }
