@@ -1,14 +1,20 @@
 package br.com.senai.sa2semestre.fabricaveiculo.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 
+/**
+ * Representa uma associação de veículo e peças
+ */
 @Entity
+@IdClass(VeiculoPecaId.class)
 public class VeiculoPeca {
+
+    @Id
     @ManyToOne
     @JoinColumn(name = "chassis", referencedColumnName = "chassis")
     private Veiculo veiculo;
+
+    @Id
     @ManyToOne
     @JoinColumn(name = "idPeca", referencedColumnName = "idPeca")
     private Peca peca;
