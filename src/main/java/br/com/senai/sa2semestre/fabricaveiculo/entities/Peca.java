@@ -1,10 +1,9 @@
 package br.com.senai.sa2semestre.fabricaveiculo.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -18,13 +17,16 @@ public class Peca {
     private Long idPeca;
     private String nome;
     private String descricao;
+    @OneToMany(mappedBy = "veiculo_peca")
+    private List<VeiculoPeca> listaDeVeiculosPeças;
 
     public Peca(){}
 
-    public Peca(Long idPeca, String nome, String descricao) {
+    public Peca(Long idPeca, String nome, String descricao, List<VeiculoPeca> listaDeVeiculosPeças) {
         this.idPeca = idPeca;
         this.nome = nome;
         this.descricao = descricao;
+        this.listaDeVeiculosPeças = listaDeVeiculosPeças;
     }
 
     public Long getIdPeca() {
@@ -51,16 +53,25 @@ public class Peca {
         this.descricao = descricao;
     }
 
+    public List<VeiculoPeca> getListaDeVeiculosPeças() {
+        return listaDeVeiculosPeças;
+    }
+
+    public void setListaDeVeiculosPeças(List<VeiculoPeca> listaDeVeiculosPeças) {
+        this.listaDeVeiculosPeças = listaDeVeiculosPeças;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Peca pecas = (Peca) o;
+        Peca peca = (Peca) o;
 
-        if (!idPeca.equals(pecas.idPeca)) return false;
-        if (!Objects.equals(nome, pecas.nome)) return false;
-        return Objects.equals(descricao, pecas.descricao);
+        if (!idPeca.equals(peca.idPeca)) return false;
+        if (!Objects.equals(nome, peca.nome)) return false;
+        if (!Objects.equals(descricao, peca.descricao)) return false;
+        return Objects.equals(listaDeVeiculosPeças, peca.listaDeVeiculosPeças);
     }
 
     @Override
@@ -68,6 +79,7 @@ public class Peca {
         int result = idPeca.hashCode();
         result = 31 * result + (nome != null ? nome.hashCode() : 0);
         result = 31 * result + (descricao != null ? descricao.hashCode() : 0);
+        result = 31 * result + (listaDeVeiculosPeças != null ? listaDeVeiculosPeças.hashCode() : 0);
         return result;
     }
 
@@ -81,6 +93,7 @@ public class Peca {
                 "ID Peça: " + idPeca +
                 ", Nome: " + nome +
                 ", Descrição: " + descricao +
+                ", Lista de veículos peças: " + listaDeVeiculosPeças +
                 "]";
     }
 }

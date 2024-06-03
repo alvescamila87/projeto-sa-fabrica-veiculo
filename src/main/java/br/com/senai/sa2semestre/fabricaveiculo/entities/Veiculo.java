@@ -2,7 +2,9 @@ package br.com.senai.sa2semestre.fabricaveiculo.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -17,14 +19,17 @@ public class Veiculo {
     private String modelo;
     private int anoFabricacao;
     private String cor;
+    @OneToMany(mappedBy = "veiculo_peca")
+    private List<VeiculoPeca> listaDeVeiculosPecas;
 
     public Veiculo(){}
 
-    public Veiculo(String chassis, String modelo, int anoFabricacao, String cor) {
+    public Veiculo(String chassis, String modelo, int anoFabricacao, String cor, List<VeiculoPeca> listaDeVeiculosPecas) {
         this.chassis = chassis;
         this.modelo = modelo;
         this.anoFabricacao = anoFabricacao;
         this.cor = cor;
+        this.listaDeVeiculosPecas = listaDeVeiculosPecas;
     }
 
     public String getChassis() {
@@ -59,6 +64,14 @@ public class Veiculo {
         this.cor = cor;
     }
 
+    public List<VeiculoPeca> getListaDeVeiculosPecas() {
+        return listaDeVeiculosPecas;
+    }
+
+    public void setListaDeVeiculosPecas(List<VeiculoPeca> listaDeVeiculosPecas) {
+        this.listaDeVeiculosPecas = listaDeVeiculosPecas;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -69,7 +82,8 @@ public class Veiculo {
         if (anoFabricacao != veiculo.anoFabricacao) return false;
         if (!chassis.equals(veiculo.chassis)) return false;
         if (!Objects.equals(modelo, veiculo.modelo)) return false;
-        return Objects.equals(cor, veiculo.cor);
+        if (!Objects.equals(cor, veiculo.cor)) return false;
+        return Objects.equals(listaDeVeiculosPecas, veiculo.listaDeVeiculosPecas);
     }
 
     @Override
@@ -78,6 +92,7 @@ public class Veiculo {
         result = 31 * result + (modelo != null ? modelo.hashCode() : 0);
         result = 31 * result + anoFabricacao;
         result = 31 * result + (cor != null ? cor.hashCode() : 0);
+        result = 31 * result + (listaDeVeiculosPecas != null ? listaDeVeiculosPecas.hashCode() : 0);
         return result;
     }
 
@@ -92,6 +107,7 @@ public class Veiculo {
                 ", Modelo: " + modelo +
                 ", Ano de fabricação: " + anoFabricacao +
                 ", Cor: " + cor +
+                ", Lista de veículo peças: " + listaDeVeiculosPecas +
                 ']';
     }
 }
