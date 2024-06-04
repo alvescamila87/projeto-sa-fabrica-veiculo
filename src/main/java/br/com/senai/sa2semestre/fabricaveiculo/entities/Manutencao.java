@@ -117,13 +117,13 @@ public class Manutencao {
      */
     @Override
     public String toString() {
-        return "MANUTENÇÃO [" +
-                "ID Manutenção: " + idManutencao +
+        return "MANUTENCAOO [" +
+                "ID Manutencao: " + idManutencao +
                 ", Equipamento: " + equipamento +
-                ", Data início: " + dataHoraInicio +
+                ", Data inicio: " + dataHoraInicio +
                 ", Data fim: " + dataHoraFim +
-                ", Descrição serviço: " + descricaoServico +
-                ", Estado da manutenção: " + estado +
+                ", Descricao servico: " + descricaoServico +
+                ", Estado da manutencao: " + estado +
                 ']';
     }
 }

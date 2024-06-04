@@ -16,7 +16,7 @@ public class Peca {
     private Long idPeca;
     private String nome;
     private String descricao;
-    @OneToMany(mappedBy = "veiculo_peca")
+    @OneToMany(mappedBy = "peca")
     private List<VeiculoPeca> listaDeVeiculosComEssaPeca;
 
     public Peca(){}
@@ -88,11 +88,11 @@ public class Peca {
      */
     @Override
     public String toString() {
-        return "PEÇA [" +
-                "ID Peça: " + idPeca +
+        return "PECA [" +
+                "ID Peca: " + idPeca +
                 ", Nome: " + nome +
-                ", Descrição: " + descricao +
-                ", Lista de veículos com essa peça: " + listaDeVeiculosComEssaPeca +
+                ", Descricao: " + descricao +
+                ", Lista de veiculos com essa peca: " + listaDeVeiculosComEssaPeca +
                 "]";
     }
 }

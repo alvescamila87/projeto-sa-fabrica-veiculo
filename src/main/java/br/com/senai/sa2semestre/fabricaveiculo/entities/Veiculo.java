@@ -19,7 +19,7 @@ public class Veiculo {
     private String modelo;
     private int anoFabricacao;
     private String cor;
-    @OneToMany(mappedBy = "veiculo_peca")
+    @OneToMany(mappedBy = "veiculo")
     private List<VeiculoPeca> listaDePecasUtilizadas;
 
     public Veiculo(){}
@@ -102,12 +102,12 @@ public class Veiculo {
      */
     @Override
     public String toString() {
-        return "VEÍCULO [" +
+        return "VEICULO [" +
                 ", Chassis: " + chassis +
                 ", Modelo: " + modelo +
-                ", Ano de fabricação: " + anoFabricacao +
+                ", Ano de fabricacao: " + anoFabricacao +
                 ", Cor: " + cor +
-                ", Lista de peças utilizadas: " + listaDePecasUtilizadas +
+                ", Lista de pecas utilizadas: " + listaDePecasUtilizadas +
                 ']';
     }
 }

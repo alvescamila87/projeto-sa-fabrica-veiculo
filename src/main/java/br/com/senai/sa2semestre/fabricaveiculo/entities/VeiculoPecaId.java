@@ -1,10 +1,12 @@
 package br.com.senai.sa2semestre.fabricaveiculo.entities;
 
 import jakarta.persistence.Embeddable;
-
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * Representa uma chave composta de tabela para a tabela associativa veiculoPeca das entidades: veículo e peça
+ */
 @Embeddable
 public class VeiculoPecaId implements Serializable {
 
@@ -47,5 +49,17 @@ public class VeiculoPecaId implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(chassis, idPeca);
+    }
+
+    /**
+     * Exibe todos os atributos de veículos peças Id
+     * @return Retorna uma representação em string do objeto Veículos Peças ID
+     */
+    @Override
+    public String toString() {
+        return "VEICULO PELA ID [" +
+                "Chassis: " + chassis +
+                ", ID Peca: " + idPeca +
+                ']';
     }
 }

@@ -102,10 +102,10 @@ public class Usuario {
      */
     @Override
     public String toString() {
-        return "USUÁRIO [" +
-                "ID usuário: " + idUsuario +
+        return "USUARIO [" +
+                "ID usuario: " + idUsuario +
                 ", Nome: " + nome +
-                ", E-mail: " + email +
+                ", Email: " + email +
                 ", Senha: " + senha +
                 ", Perfil: " + perfil +
                 ']';

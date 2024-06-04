@@ -106,9 +106,9 @@ public class Equipamento {
         return "EQUIPAMENTO [" +
                 "ID equipamento: " + idEquipamento +
                 ", Tipo de equipamento:" + tipoEquipamento +
-                ", Descrição do equipamento: " + descricao +
+                ", Descricao do equipamento: " + descricao +
                 ", Estado do equipamento: " + estado +
-                ", Lista de manutenções: " + listaDeManutencoes +
+                ", Lista de manutencoes: " + listaDeManutencoes +
                 ']';
     }
 }
