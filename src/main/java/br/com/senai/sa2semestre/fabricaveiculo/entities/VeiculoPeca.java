@@ -6,6 +6,7 @@ import jakarta.persistence.*;
  * Representa uma associação de veículo e peças
  */
 @Entity
+@Table(name = "veiculoPeca")
 @IdClass(VeiculoPecaId.class)
 public class VeiculoPeca {
 
