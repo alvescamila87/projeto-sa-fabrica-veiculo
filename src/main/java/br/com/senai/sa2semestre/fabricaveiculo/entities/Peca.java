@@ -88,11 +88,11 @@ public class Peca {
      */
     @Override
     public String toString() {
-        return "PECA [" +
-                "ID Peca: " + idPeca +
+        return "PEÇA [" +
+                "ID Peça: " + idPeca +
                 ", Nome: " + nome +
-                ", Descricao: " + descricao +
-                ", Lista de veiculos com essa peca: " + listaDeVeiculosComEssaPeca +
+                ", Descrição: " + descricao +
+                ", Lista de veículos com essa peça: " + listaDeVeiculosComEssaPeca +
                 "]";
     }
 }

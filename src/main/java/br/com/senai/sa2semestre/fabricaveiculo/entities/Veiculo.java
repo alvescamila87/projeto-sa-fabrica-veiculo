@@ -102,12 +102,12 @@ public class Veiculo {
      */
     @Override
     public String toString() {
-        return "VEICULO [" +
+        return "VEÍCULO [" +
                 ", Chassis: " + chassis +
                 ", Modelo: " + modelo +
-                ", Ano de fabricacao: " + anoFabricacao +
+                ", Ano de fabricação: " + anoFabricacao +
                 ", Cor: " + cor +
-                ", Lista de pecas utilizadas: " + listaDePecasUtilizadas +
+                ", Lista de peças utilizadas: " + listaDePecasUtilizadas +
                 ']';
     }
 }

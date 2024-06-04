@@ -79,10 +79,10 @@ public class VeiculoPeca {
      */
     @Override
     public String toString() {
-        return "VEICULOS PECAS [" +
-                "Veiculo: " + veiculo +
-                ", Peca: " + peca +
-                ", Quantidade de pecas utilizadas: " + quantidadePecas +
+        return "VEÍCULOS PEÇAS [" +
+                "Veículo: " + veiculo +
+                ", Peça: " + peca +
+                ", Quantidade de peças utilizadas: " + quantidadePecas +
                 '}';
     }
 }
