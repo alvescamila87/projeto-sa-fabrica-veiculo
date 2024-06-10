@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Controlador REST para gerenciamento associativo de veículos-peças.
+ */
 @RestController
 @RequestMapping("/veiculos-pecas")
 public class VeiculoPecaController {
@@ -49,7 +52,6 @@ public class VeiculoPecaController {
 
         if (veiculoPecaPesquisado.isPresent()){
             VeiculoPeca veiculoPecaExistente = veiculoPecaPesquisado.get();
-            veiculoPecaExistente.setQuantidadePecas(veiculoPecaParaAtualizar.getQuantidadePecas());
             return ResponseEntity.ok(veiculoPecasRepository.save(veiculoPecaParaAtualizar));
         } else {
             return ResponseEntity.notFound().build();

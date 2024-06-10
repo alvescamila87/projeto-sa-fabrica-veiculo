@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Controlador REST para gerenciamento de manutenção.
+ */
 @RestController
 @RequestMapping("/manutencoes")
 public class ManutencaoController {
