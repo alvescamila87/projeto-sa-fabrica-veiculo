@@ -19,14 +19,12 @@ public class VeiculoPeca {
     @ManyToOne
     @JoinColumn(name = "idPeca", referencedColumnName = "idPeca")
     private Peca peca;
-    private int quantidadePecas;
 
     public VeiculoPeca(){}
 
-    public VeiculoPeca(Veiculo veiculo, Peca peca, int quantidadePecas) {
+    public VeiculoPeca(Veiculo veiculo, Peca peca) {
         this.veiculo = veiculo;
         this.peca = peca;
-        this.quantidadePecas = quantidadePecas;
     }
 
     public Veiculo getVeiculo() {
@@ -45,15 +43,9 @@ public class VeiculoPeca {
         this.peca = peca;
     }
 
-    public int getQuantidadePecas() {
-        return quantidadePecas;
-    }
-
-    public void setQuantidadePecas(int quantidadePecas) {
-        this.quantidadePecas = quantidadePecas;
-    }
 
     // Está considerando as duas chaves estrangeiras como comparação: id peça e chassis veículo
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -61,7 +53,6 @@ public class VeiculoPeca {
 
         VeiculoPeca that = (VeiculoPeca) o;
 
-        if (quantidadePecas != that.quantidadePecas) return false;
         if (!veiculo.equals(that.veiculo)) return false;
         return peca.equals(that.peca);
     }
@@ -70,7 +61,6 @@ public class VeiculoPeca {
     public int hashCode() {
         int result = veiculo.hashCode();
         result = 31 * result + peca.hashCode();
-        result = 31 * result + quantidadePecas;
         return result;
     }
 
@@ -83,7 +73,6 @@ public class VeiculoPeca {
         return "VEÍCULOS PEÇAS [" +
                 "Veículo: " + veiculo +
                 ", Peça: " + peca +
-                ", Quantidade de peças utilizadas: " + quantidadePecas +
                 '}';
     }
 }

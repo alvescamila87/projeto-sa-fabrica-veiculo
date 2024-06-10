@@ -16,15 +16,18 @@ public class Peca {
     private Long idPeca;
     private String nome;
     private String descricao;
+
+    private int quantidadePecas;
     @OneToMany(mappedBy = "peca")
     private List<VeiculoPeca> listaDeVeiculosComEssaPeca;
 
     public Peca(){}
 
-    public Peca(Long idPeca, String nome, String descricao, List<VeiculoPeca> listaDeVeiculosComEssaPeca) {
+    public Peca(Long idPeca, String nome, String descricao, int quantidadePecas, List<VeiculoPeca> listaDeVeiculosComEssaPeca) {
         this.idPeca = idPeca;
         this.nome = nome;
         this.descricao = descricao;
+        this.quantidadePecas = quantidadePecas;
         this.listaDeVeiculosComEssaPeca = listaDeVeiculosComEssaPeca;
     }
 
@@ -52,6 +55,14 @@ public class Peca {
         this.descricao = descricao;
     }
 
+    public int getQuantidadePecas() {
+        return quantidadePecas;
+    }
+
+    public void setQuantidadePecas(int quantidadePecas) {
+        this.quantidadePecas = quantidadePecas;
+    }
+
     public List<VeiculoPeca> getListaDeVeiculosComEssaPeca() {
         return listaDeVeiculosComEssaPeca;
     }
@@ -67,6 +78,7 @@ public class Peca {
 
         Peca peca = (Peca) o;
 
+        if (quantidadePecas != peca.quantidadePecas) return false;
         if (!idPeca.equals(peca.idPeca)) return false;
         if (!Objects.equals(nome, peca.nome)) return false;
         if (!Objects.equals(descricao, peca.descricao)) return false;
@@ -78,6 +90,7 @@ public class Peca {
         int result = idPeca.hashCode();
         result = 31 * result + (nome != null ? nome.hashCode() : 0);
         result = 31 * result + (descricao != null ? descricao.hashCode() : 0);
+        result = 31 * result + quantidadePecas;
         result = 31 * result + (listaDeVeiculosComEssaPeca != null ? listaDeVeiculosComEssaPeca.hashCode() : 0);
         return result;
     }
@@ -92,6 +105,7 @@ public class Peca {
                 "ID Peça: " + idPeca +
                 ", Nome: " + nome +
                 ", Descrição: " + descricao +
+                ", Quantidade de peças: " + quantidadePecas +
                 ", Lista de veículos com essa peça: " + listaDeVeiculosComEssaPeca +
                 "]";
     }
