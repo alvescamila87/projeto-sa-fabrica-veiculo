@@ -21,14 +21,18 @@ public class Peca {
     @OneToMany(mappedBy = "peca")
     private List<VeiculoPeca> listaDeVeiculosComEssaPeca;
 
+    @OneToMany(mappedBy = "peca")
+    private List<Estoque> listaDePecasEmEstoque;
+
     public Peca(){}
 
-    public Peca(Long idPeca, String nome, String descricao, int quantidadePecas, List<VeiculoPeca> listaDeVeiculosComEssaPeca) {
+    public Peca(Long idPeca, String nome, String descricao, int quantidadePecas, List<VeiculoPeca> listaDeVeiculosComEssaPeca, List<Estoque> listaDePecasEmEstoque) {
         this.idPeca = idPeca;
         this.nome = nome;
         this.descricao = descricao;
         this.quantidadePecas = quantidadePecas;
         this.listaDeVeiculosComEssaPeca = listaDeVeiculosComEssaPeca;
+        this.listaDePecasEmEstoque = listaDePecasEmEstoque;
     }
 
     public Long getIdPeca() {
@@ -71,6 +75,14 @@ public class Peca {
         this.listaDeVeiculosComEssaPeca = listaDeVeiculosComEssaPeca;
     }
 
+    public List<Estoque> getListaDePecasEmEstoque() {
+        return listaDePecasEmEstoque;
+    }
+
+    public void setListaDePecasEmEstoque(List<Estoque> listaDePecasEmEstoque) {
+        this.listaDePecasEmEstoque = listaDePecasEmEstoque;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -82,7 +94,9 @@ public class Peca {
         if (!idPeca.equals(peca.idPeca)) return false;
         if (!Objects.equals(nome, peca.nome)) return false;
         if (!Objects.equals(descricao, peca.descricao)) return false;
-        return Objects.equals(listaDeVeiculosComEssaPeca, peca.listaDeVeiculosComEssaPeca);
+        if (!Objects.equals(listaDeVeiculosComEssaPeca, peca.listaDeVeiculosComEssaPeca))
+            return false;
+        return Objects.equals(listaDePecasEmEstoque, peca.listaDePecasEmEstoque);
     }
 
     @Override
@@ -92,6 +106,7 @@ public class Peca {
         result = 31 * result + (descricao != null ? descricao.hashCode() : 0);
         result = 31 * result + quantidadePecas;
         result = 31 * result + (listaDeVeiculosComEssaPeca != null ? listaDeVeiculosComEssaPeca.hashCode() : 0);
+        result = 31 * result + (listaDePecasEmEstoque != null ? listaDePecasEmEstoque.hashCode() : 0);
         return result;
     }
 
@@ -107,6 +122,7 @@ public class Peca {
                 ", Descrição: " + descricao +
                 ", Quantidade de peças: " + quantidadePecas +
                 ", Lista de veículos com essa peça: " + listaDeVeiculosComEssaPeca +
+                ", Lista de peças em estoque: " + listaDePecasEmEstoque +
                 "]";
     }
 }
