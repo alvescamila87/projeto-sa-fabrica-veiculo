@@ -1,9 +1,6 @@
 package br.com.senai.sa2semestre.fabricaveiculo.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.Objects;
 
@@ -19,12 +16,13 @@ public class Usuario {
     private String nome;
     private String email;
     private String senha;
-    private String perfil;
+    @Enumerated(EnumType.STRING)
+    private Perfil perfil;
 
     public Usuario(){
 
     }
-    public Usuario(Long idUsuario, String nome, String email, String senha, String perfil) {
+    public Usuario(Long idUsuario, String nome, String email, String senha, Perfil perfil) {
         this.idUsuario = idUsuario;
         this.nome = nome;
         this.email = email;
@@ -64,11 +62,11 @@ public class Usuario {
         this.senha = senha;
     }
 
-    public String getPerfil() {
+    public Perfil getPerfil() {
         return perfil;
     }
 
-    public void setPerfil(String perfil) {
+    public void setPerfil(Perfil perfil) {
         this.perfil = perfil;
     }
 
@@ -83,7 +81,7 @@ public class Usuario {
         if (!Objects.equals(nome, usuario.nome)) return false;
         if (!Objects.equals(email, usuario.email)) return false;
         if (!Objects.equals(senha, usuario.senha)) return false;
-        return Objects.equals(perfil, usuario.perfil);
+        return perfil == usuario.perfil;
     }
 
     @Override
