@@ -47,7 +47,7 @@ public class EquipamentoController {
      * @param id o ID do equipamento.
      * @return o equipamento com o ID especificado.
      */
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Equipamento> getEquipamentoById(@PathVariable Long id){
         Optional<Equipamento> equipamentoPesquisado = equipamentoRepository.findById(id);
 
