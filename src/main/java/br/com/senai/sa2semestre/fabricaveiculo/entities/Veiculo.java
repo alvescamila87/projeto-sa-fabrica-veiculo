@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Representa o veículo
+ * Representa o veículo a ser montado
  */
 @Entity
 public class Veiculo {

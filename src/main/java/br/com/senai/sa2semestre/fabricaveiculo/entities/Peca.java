@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Representa a peça
+ * Representa a peça a ser utilizada na montagem do veículo
  */
 @Entity
 public class Peca {
@@ -24,15 +24,19 @@ public class Peca {
     @OneToMany(mappedBy = "peca")
     private List<Estoque> listaDePecasEmEstoque;
 
+    @OneToMany(mappedBy = "peca")
+    private List<Producao> listaDePecasEmProducao;
+
     public Peca(){}
 
-    public Peca(Long idPeca, String nome, String descricao, int quantidadePecas, List<VeiculoPeca> listaDeVeiculosComEssaPeca, List<Estoque> listaDePecasEmEstoque) {
+    public Peca(Long idPeca, String nome, String descricao, int quantidadePecas, List<VeiculoPeca> listaDeVeiculosComEssaPeca, List<Estoque> listaDePecasEmEstoque, List<Producao> listaDePecasEmProducao) {
         this.idPeca = idPeca;
         this.nome = nome;
         this.descricao = descricao;
         this.quantidadePecas = quantidadePecas;
         this.listaDeVeiculosComEssaPeca = listaDeVeiculosComEssaPeca;
         this.listaDePecasEmEstoque = listaDePecasEmEstoque;
+        this.listaDePecasEmProducao = listaDePecasEmProducao;
     }
 
     public Long getIdPeca() {
@@ -83,6 +87,14 @@ public class Peca {
         this.listaDePecasEmEstoque = listaDePecasEmEstoque;
     }
 
+    public List<Producao> getListaDePecasEmProducao() {
+        return listaDePecasEmProducao;
+    }
+
+    public void setListaDePecasEmProducao(List<Producao> listaDePecasEmProducao) {
+        this.listaDePecasEmProducao = listaDePecasEmProducao;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -96,7 +108,9 @@ public class Peca {
         if (!Objects.equals(descricao, peca.descricao)) return false;
         if (!Objects.equals(listaDeVeiculosComEssaPeca, peca.listaDeVeiculosComEssaPeca))
             return false;
-        return Objects.equals(listaDePecasEmEstoque, peca.listaDePecasEmEstoque);
+        if (!Objects.equals(listaDePecasEmEstoque, peca.listaDePecasEmEstoque))
+            return false;
+        return Objects.equals(listaDePecasEmProducao, peca.listaDePecasEmProducao);
     }
 
     @Override
@@ -107,6 +121,7 @@ public class Peca {
         result = 31 * result + quantidadePecas;
         result = 31 * result + (listaDeVeiculosComEssaPeca != null ? listaDeVeiculosComEssaPeca.hashCode() : 0);
         result = 31 * result + (listaDePecasEmEstoque != null ? listaDePecasEmEstoque.hashCode() : 0);
+        result = 31 * result + (listaDePecasEmProducao != null ? listaDePecasEmProducao.hashCode() : 0);
         return result;
     }
 
@@ -123,6 +138,7 @@ public class Peca {
                 ", Quantidade de peças: " + quantidadePecas +
                 ", Lista de veículos com essa peça: " + listaDeVeiculosComEssaPeca +
                 ", Lista de peças em estoque: " + listaDePecasEmEstoque +
+                ", Lista de peças em produção: " + listaDePecasEmProducao +
                 "]";
     }
 }

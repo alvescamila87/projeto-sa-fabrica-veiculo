@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 
 import java.util.Objects;
 
+/**
+ * Representa a estoque de peças para montagem de veículos
+ */
 @Entity
 public class Estoque {
 
