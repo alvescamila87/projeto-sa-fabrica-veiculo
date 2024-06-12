@@ -23,12 +23,12 @@ public class Producao {
     @JoinColumn(name = "idPeca", referencedColumnName = "idPeca")
     private Peca peca;
     @OneToMany(mappedBy = "producao")
-    private List<Qualidade> listaDeInspecoesDeQualidade;
+    private List<InspecaoQualidade> listaDeInspecoesDeQualidade;
 
 
     public Producao(){}
 
-    public Producao(Long idProducao, LocalDateTime dataHora, int quantidadeProduzida, Estado estado, Peca peca, List<Qualidade> listaDeInspecoesDeQualidade) {
+    public Producao(Long idProducao, LocalDateTime dataHora, int quantidadeProduzida, Estado estado, Peca peca, List<InspecaoQualidade> listaDeInspecoesDeQualidade) {
         this.idProducao = idProducao;
         this.dataHora = dataHora;
         this.quantidadeProduzida = quantidadeProduzida;
@@ -77,12 +77,12 @@ public class Producao {
         this.peca = peca;
     }
 
-    public List<Qualidade> getListaDeInspecoesDeQualidade() {
+    public List<InspecaoQualidade> getListaDeInspecoesDeQualidade() {
         return listaDeInspecoesDeQualidade;
     }
 
-    public void setListaDeInspecoesDeQualidade(List<Qualidade> listaDeInspecoesDeQualidade) {
-        this.listaDeInspecoesDeQualidade = listaDeInspecoesDeQualidade;
+    public void setListaDeInspecoesDeQualidade(List<InspecaoQualidade> listaDeInspecoesDeInspecaoQualidade) {
+        this.listaDeInspecoesDeQualidade = listaDeInspecoesDeInspecaoQualidade;
     }
 
     @Override
@@ -117,9 +117,9 @@ public class Producao {
                 "ID Produção: " + idProducao +
                 ", Produzido em: " + dataHora +
                 ", Quantidade produzida: " + quantidadeProduzida +
-                ", Estado: '" + estado + '\'' +
+                ", Estado: " + estado +
                 ", ID Peça: " + peca +
                 ", Lista de inspeções de qualidade: " + listaDeInspecoesDeQualidade +
-                '}';
+                ']';
     }
 }

@@ -9,7 +9,7 @@ import java.util.Objects;
  * Representa a insperação de qualidade após durante o processo de montagem do veículo
  */
 @Entity
-public class Qualidade {
+public class InspecaoQualidade {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idInspecao;
@@ -21,9 +21,9 @@ public class Qualidade {
     @JoinColumn(name = "idProducao", referencedColumnName = "idProducao")
     private Producao producao;
 
-    public Qualidade(){}
+    public InspecaoQualidade(){}
 
-    public Qualidade(Long idInspecao, LocalDateTime dataHoraInspecao, ResultadoInspecaoQualidade resultadoInspecaoQualidade, String descricaoInspecaoQualidade, Producao producao) {
+    public InspecaoQualidade(Long idInspecao, LocalDateTime dataHoraInspecao, ResultadoInspecaoQualidade resultadoInspecaoQualidade, String descricaoInspecaoQualidade, Producao producao) {
         this.idInspecao = idInspecao;
         this.dataHoraInspecao = dataHoraInspecao;
         this.resultadoInspecaoQualidade = resultadoInspecaoQualidade;
@@ -76,15 +76,15 @@ public class Qualidade {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Qualidade qualidade = (Qualidade) o;
+        InspecaoQualidade inspecaoQualidade = (InspecaoQualidade) o;
 
-        if (!idInspecao.equals(qualidade.idInspecao)) return false;
-        if (!Objects.equals(dataHoraInspecao, qualidade.dataHoraInspecao))
+        if (!idInspecao.equals(inspecaoQualidade.idInspecao)) return false;
+        if (!Objects.equals(dataHoraInspecao, inspecaoQualidade.dataHoraInspecao))
             return false;
-        if (resultadoInspecaoQualidade != qualidade.resultadoInspecaoQualidade) return false;
-        if (!Objects.equals(descricaoInspecaoQualidade, qualidade.descricaoInspecaoQualidade))
+        if (resultadoInspecaoQualidade != inspecaoQualidade.resultadoInspecaoQualidade) return false;
+        if (!Objects.equals(descricaoInspecaoQualidade, inspecaoQualidade.descricaoInspecaoQualidade))
             return false;
-        return Objects.equals(producao, qualidade.producao);
+        return Objects.equals(producao, inspecaoQualidade.producao);
     }
 
     @Override
@@ -101,9 +101,9 @@ public class Qualidade {
     public String toString() {
         return "INSPEÇÃO DE QUALIDADE [" +
                 "ID Inspeção: " + idInspecao +
-                ", Data e hora da inspeção: " + dataHoraInspecao +
+                ", Inspecionado em: " + dataHoraInspecao +
                 ", Resultado da inspeção: " + resultadoInspecaoQualidade +
-                ", Descrição da inspeção: '" + descricaoInspecaoQualidade + '\'' +
+                ", Descrição da inspeção: '" + descricaoInspecaoQualidade +
                 ", ID Produção: " + producao +
                 ']';
     }
