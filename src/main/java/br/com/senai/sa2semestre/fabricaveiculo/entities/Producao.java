@@ -16,7 +16,8 @@ public class Producao {
     private Long idProducao;
     private LocalDateTime dataHora;
     private int quantidadeProduzida;
-    private String estado;
+    @Enumerated(EnumType.STRING)
+    private Estado estado;
 
     @ManyToOne
     @JoinColumn(name = "idPeca", referencedColumnName = "idPeca")
@@ -24,7 +25,7 @@ public class Producao {
 
     public Producao(){}
 
-    public Producao(Long idProducao, LocalDateTime dataHora, int quantidadeProduzida, String estado, Peca peca) {
+    public Producao(Long idProducao, LocalDateTime dataHora, int quantidadeProduzida, Estado estado, Peca peca) {
         this.idProducao = idProducao;
         this.dataHora = dataHora;
         this.quantidadeProduzida = quantidadeProduzida;
@@ -56,11 +57,11 @@ public class Producao {
         this.quantidadeProduzida = quantidadeProduzida;
     }
 
-    public String getEstado() {
+    public Estado getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(Estado estado) {
         this.estado = estado;
     }
 
@@ -82,7 +83,7 @@ public class Producao {
         if (quantidadeProduzida != producao.quantidadeProduzida) return false;
         if (!idProducao.equals(producao.idProducao)) return false;
         if (!Objects.equals(dataHora, producao.dataHora)) return false;
-        if (!Objects.equals(estado, producao.estado)) return false;
+        if (estado != producao.estado) return false;
         return Objects.equals(peca, producao.peca);
     }
 

@@ -16,7 +16,8 @@ public class Equipamento {
     private Long idEquipamento;
     private String tipoEquipamento;
     private String descricao;
-    private String estado;
+    @Enumerated(EnumType.STRING)
+    private Estado estado;
 
     @OneToMany(mappedBy = "equipamento")
     private List<Manutencao> listaDeManutencoes;
@@ -24,7 +25,7 @@ public class Equipamento {
     public Equipamento() {
     }
 
-    public Equipamento(Long idEquipamento, String tipoEquipamento, String descricao, String estado, List<Manutencao> listaDeManutencoes) {
+    public Equipamento(Long idEquipamento, String tipoEquipamento, String descricao, Estado estado, List<Manutencao> listaDeManutencoes) {
         this.idEquipamento = idEquipamento;
         this.tipoEquipamento = tipoEquipamento;
         this.descricao = descricao;
@@ -56,11 +57,11 @@ public class Equipamento {
         this.descricao = descricao;
     }
 
-    public String getEstado() {
+    public Estado getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(Estado estado) {
         this.estado = estado;
     }
 
@@ -83,7 +84,7 @@ public class Equipamento {
         if (!Objects.equals(tipoEquipamento, that.tipoEquipamento))
             return false;
         if (!Objects.equals(descricao, that.descricao)) return false;
-        if (!Objects.equals(estado, that.estado)) return false;
+        if (estado != that.estado) return false;
         return Objects.equals(listaDeManutencoes, that.listaDeManutencoes);
     }
 

@@ -20,13 +20,14 @@ public class Manutencao {
     private LocalDateTime dataHoraInicio;
     private LocalDateTime dataHoraFim;
     private String descricaoServico;
-    private String estado;
+    @Enumerated(EnumType.STRING)
+    private Estado estado;
 
     public Manutencao(){
 
     }
 
-    public Manutencao(Long idManutencao, Equipamento equipamento, LocalDateTime dataHoraInicio, LocalDateTime dataHoraFim, String descricaoServico, String estado) {
+    public Manutencao(Long idManutencao, Equipamento equipamento, LocalDateTime dataHoraInicio, LocalDateTime dataHoraFim, String descricaoServico, Estado estado) {
         this.idManutencao = idManutencao;
         this.equipamento = equipamento;
         this.dataHoraInicio = dataHoraInicio;
@@ -67,11 +68,11 @@ public class Manutencao {
         this.descricaoServico = descricaoServico;
     }
 
-    public String getEstado() {
+    public Estado getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(Estado estado) {
         this.estado = estado;
     }
 
@@ -97,7 +98,7 @@ public class Manutencao {
         if (!Objects.equals(dataHoraFim, that.dataHoraFim)) return false;
         if (!Objects.equals(descricaoServico, that.descricaoServico))
             return false;
-        return Objects.equals(estado, that.estado);
+        return estado == that.estado;
     }
 
     @Override
