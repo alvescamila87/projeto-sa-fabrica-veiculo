@@ -105,7 +105,7 @@ public class Usuario {
                 ", Nome: " + nome +
                 ", E-mail: " + email +
                 ", Senha: " + senha +
-                ", Perfil: " + perfil +
+                ", Tipo de perfil: " + perfil +
                 ']';
     }
 }

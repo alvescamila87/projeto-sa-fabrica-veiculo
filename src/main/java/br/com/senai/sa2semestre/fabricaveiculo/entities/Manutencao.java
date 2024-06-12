@@ -120,7 +120,7 @@ public class Manutencao {
     public String toString() {
         return "MANUTENÇÃO [" +
                 "ID Manutenção: " + idManutencao +
-                ", Equipamento: " + equipamento +
+                ", ID Equipamento: " + equipamento +
                 ", Data início: " + dataHoraInicio +
                 ", Data fim: " + dataHoraFim +
                 ", Descrição serviço: " + descricaoServico +

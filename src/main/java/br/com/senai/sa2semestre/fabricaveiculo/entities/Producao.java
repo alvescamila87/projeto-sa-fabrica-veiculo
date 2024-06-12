@@ -3,6 +3,7 @@ package br.com.senai.sa2semestre.fabricaveiculo.entities;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -18,19 +19,22 @@ public class Producao {
     private int quantidadeProduzida;
     @Enumerated(EnumType.STRING)
     private Estado estado;
-
     @ManyToOne
     @JoinColumn(name = "idPeca", referencedColumnName = "idPeca")
     private Peca peca;
+    @OneToMany(mappedBy = "producao")
+    private List<Qualidade> listaDeInspecoesDeQualidade;
+
 
     public Producao(){}
 
-    public Producao(Long idProducao, LocalDateTime dataHora, int quantidadeProduzida, Estado estado, Peca peca) {
+    public Producao(Long idProducao, LocalDateTime dataHora, int quantidadeProduzida, Estado estado, Peca peca, List<Qualidade> listaDeInspecoesDeQualidade) {
         this.idProducao = idProducao;
         this.dataHora = dataHora;
         this.quantidadeProduzida = quantidadeProduzida;
         this.estado = estado;
         this.peca = peca;
+        this.listaDeInspecoesDeQualidade = listaDeInspecoesDeQualidade;
     }
 
     public Long getIdProducao() {
@@ -73,6 +77,14 @@ public class Producao {
         this.peca = peca;
     }
 
+    public List<Qualidade> getListaDeInspecoesDeQualidade() {
+        return listaDeInspecoesDeQualidade;
+    }
+
+    public void setListaDeInspecoesDeQualidade(List<Qualidade> listaDeInspecoesDeQualidade) {
+        this.listaDeInspecoesDeQualidade = listaDeInspecoesDeQualidade;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -84,7 +96,8 @@ public class Producao {
         if (!idProducao.equals(producao.idProducao)) return false;
         if (!Objects.equals(dataHora, producao.dataHora)) return false;
         if (estado != producao.estado) return false;
-        return Objects.equals(peca, producao.peca);
+        if (!Objects.equals(peca, producao.peca)) return false;
+        return Objects.equals(listaDeInspecoesDeQualidade, producao.listaDeInspecoesDeQualidade);
     }
 
     @Override
@@ -94,6 +107,7 @@ public class Producao {
         result = 31 * result + quantidadeProduzida;
         result = 31 * result + (estado != null ? estado.hashCode() : 0);
         result = 31 * result + (peca != null ? peca.hashCode() : 0);
+        result = 31 * result + (listaDeInspecoesDeQualidade != null ? listaDeInspecoesDeQualidade.hashCode() : 0);
         return result;
     }
 
@@ -104,7 +118,8 @@ public class Producao {
                 ", Produzido em: " + dataHora +
                 ", Quantidade produzida: " + quantidadeProduzida +
                 ", Estado: '" + estado + '\'' +
-                ", Peça: " + peca +
+                ", ID Peça: " + peca +
+                ", Lista de inspeções de qualidade: " + listaDeInspecoesDeQualidade +
                 '}';
     }
 }

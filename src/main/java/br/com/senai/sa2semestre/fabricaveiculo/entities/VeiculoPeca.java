@@ -72,7 +72,7 @@ public class VeiculoPeca {
     public String toString() {
         return "VEÍCULOS PEÇAS [" +
                 "Veículo: " + veiculo +
-                ", Peça: " + peca +
+                ", ID Peça: " + peca +
                 '}';
     }
 }

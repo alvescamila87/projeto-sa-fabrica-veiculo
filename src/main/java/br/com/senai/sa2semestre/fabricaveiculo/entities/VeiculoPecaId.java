@@ -58,7 +58,7 @@ public class VeiculoPecaId implements Serializable {
     @Override
     public String toString() {
         return "VEÍCULO PEÇA ID [" +
-                "Chassis: " + chassis +
+                "Chassis veículo: " + chassis +
                 ", ID Peça: " + idPeca +
                 ']';
     }
