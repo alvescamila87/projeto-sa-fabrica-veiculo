@@ -1,6 +1,8 @@
 package br.com.senai.sa2semestre.fabricaveiculo.entities;
 
 import jakarta.persistence.Embeddable;
+import jakarta.persistence.EmbeddedId;
+
 import java.io.Serializable;
 import java.util.Objects;
 

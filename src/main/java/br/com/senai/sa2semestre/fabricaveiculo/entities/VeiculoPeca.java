@@ -7,15 +7,19 @@ import jakarta.persistence.*;
  */
 @Entity
 @Table(name = "veiculoPeca")
-@IdClass(VeiculoPecaId.class)
 public class VeiculoPeca {
 
-    @Id
+    @EmbeddedId
+    private VeiculoPecaId id;
+
+    //@Id
+    @MapsId("chassis")
     @ManyToOne
     @JoinColumn(name = "chassis", referencedColumnName = "chassis")
     private Veiculo veiculo;
 
-    @Id
+    //@Id
+    @MapsId("idPeca")
     @ManyToOne
     @JoinColumn(name = "idPeca", referencedColumnName = "idPeca")
     private Peca peca;
