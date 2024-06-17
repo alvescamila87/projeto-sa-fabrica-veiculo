@@ -6,7 +6,8 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 /**
- * Representa a insperação de qualidade após durante o processo de montagem do veículo
+ * Representa a inspeção de qualidade que deve garantir
+ * que o veículo finalizado atenda aos padrões de qualidade e segurança.
  */
 @Entity
 public class InspecaoQualidade {

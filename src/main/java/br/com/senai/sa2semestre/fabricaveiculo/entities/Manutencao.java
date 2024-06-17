@@ -6,7 +6,8 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 /**
- * Representa a manutenção do equipamento do veículo montado
+ * Representa a manutenção e reparo dos equipamentos e peças ao
+ * longo do processo de produção de montagem do veículo.
  */
 @Entity
 public class Manutencao {

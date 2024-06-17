@@ -7,7 +7,8 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Representa a produção de montagem de veículos
+ * Representa a produção, ou seja, o processo de montagem do veículo,
+ * utilizando peças e equipamentos.
  */
 @Entity
 public class Producao {

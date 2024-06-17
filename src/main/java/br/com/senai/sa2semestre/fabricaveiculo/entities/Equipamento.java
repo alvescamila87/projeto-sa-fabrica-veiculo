@@ -6,7 +6,8 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Representa o equipamento
+ * Representa o equipamento, o maquinário e ferramentas
+ * utilizadas na montagem do veículo.
  */
 @Entity
 public class Equipamento {

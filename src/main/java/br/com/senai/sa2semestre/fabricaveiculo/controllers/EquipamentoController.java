@@ -91,7 +91,7 @@ public class EquipamentoController {
      * @param id o ID do equipamento a ser excluído.
      * @return uma resposta indicando o sucesso ou falha da operação.
      */
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteEquipamento(@PathVariable Long id){
         Optional<Equipamento> equipamentoPesquisado = equipamentoRepository.findById(id);
 

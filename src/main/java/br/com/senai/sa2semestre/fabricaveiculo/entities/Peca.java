@@ -6,7 +6,8 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Representa a peça a ser utilizada na montagem do veículo
+ * Representa a peça que são os componentes individuais
+ * utilizados na montagem do veículo.
  */
 @Entity
 public class Peca {

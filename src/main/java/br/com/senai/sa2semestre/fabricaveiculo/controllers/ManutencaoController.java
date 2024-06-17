@@ -60,7 +60,7 @@ public class ManutencaoController {
      * @param manutencaoParaAtualizar os novos dados da manutenção.
      * @return a manutenção atualizada.
      */
-    @PutMapping("{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Manutencao> updateManutencao(@PathVariable Long id, Manutencao manutencaoParaAtualizar){
         Optional<Manutencao> manutencaoPesquisada = manutencaoRepository.findById(id);
 
@@ -77,7 +77,7 @@ public class ManutencaoController {
      * @param id o ID da manutenção a ser excluída.
      * @return uma resposta indicando o sucesso ou falha da operação.
      */
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteManutencao(@PathVariable Long id){
         Optional<Manutencao> manutencaoPesquisada = manutencaoRepository.findById(id);
 

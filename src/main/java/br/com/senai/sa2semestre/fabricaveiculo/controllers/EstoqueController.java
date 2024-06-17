@@ -13,7 +13,7 @@ import java.util.Optional;
  * Controlador REST para gerenciamento de estoque.
  */
 @RestController
-@RequestMapping("/estoque")
+@RequestMapping("/estoques")
 public class EstoqueController {
 
     @Autowired

@@ -32,7 +32,7 @@ public class UsuarioController {
      * @param id o ID do usuário.
      * @return o usuário com o ID especificado.
      */
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Usuario> getUsuarioById(@PathVariable Long id){
         Optional<Usuario> usuarioPesquisado = usuarioRepository.findById(id);
 
@@ -59,7 +59,7 @@ public class UsuarioController {
      * @param usuarioParaAtualizar os novos dados do usuário.
      * @return o usuário atualizado.
      */
-    @PutMapping
+    @PutMapping("/{id}")
     public ResponseEntity<Usuario> updateUsuario(@PathVariable Long id, @RequestBody Usuario usuarioParaAtualizar){
         Optional<Usuario> usuarioPesquisado = usuarioRepository.findById(id);
 
@@ -76,7 +76,7 @@ public class UsuarioController {
      * @param id o ID do usuário a ser excluído.
      * @return uma resposta indicando o sucesso ou falha da operação.
      */
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUsuario(@PathVariable Long id){
         Optional<Usuario> usuarioPesquisado = usuarioRepository.findById(id);
 
