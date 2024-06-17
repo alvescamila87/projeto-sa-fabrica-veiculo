@@ -27,6 +27,7 @@ public class Producao {
 
     @ManyToOne
     @JoinColumn(name = "idPeca", referencedColumnName = "idPeca")
+    @JsonBackReference
     private Peca peca;
 
     @OneToMany(mappedBy = "producao")

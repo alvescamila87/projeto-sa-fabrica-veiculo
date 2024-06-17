@@ -2,7 +2,6 @@ package br.com.senai.sa2semestre.fabricaveiculo.controllers;
 
 import br.com.senai.sa2semestre.fabricaveiculo.entities.InspecaoQualidade;
 import br.com.senai.sa2semestre.fabricaveiculo.repositories.InspecaoQualidadeRepository;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

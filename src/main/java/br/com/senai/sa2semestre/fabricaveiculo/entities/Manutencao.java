@@ -19,6 +19,7 @@ public class Manutencao {
 
     @ManyToOne
     @JoinColumn(name = "idEquipamento", referencedColumnName = "idEquipamento")
+    @JsonBackReference
     private Equipamento equipamento;
     private LocalDateTime dataHoraInicio;
     private LocalDateTime dataHoraFim;
