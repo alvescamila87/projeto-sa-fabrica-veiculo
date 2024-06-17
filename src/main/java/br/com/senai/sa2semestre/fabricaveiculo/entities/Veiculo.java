@@ -1,9 +1,8 @@
 package br.com.senai.sa2semestre.fabricaveiculo.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -14,18 +13,24 @@ import java.util.Objects;
 @Entity
 public class Veiculo {
 
-
     @Id
-    private String chassis; // "chassis": "9hj NFYTf5 Kg VF2808": deve ser informado
+    private String chassis;
     private String modelo;
     private int anoFabricacao;
     private String cor;
-    @OneToMany(mappedBy = "veiculo")
-    private List<VeiculoPeca> listaDePecasUtilizadas;
+
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(
+            name = "veiculo_peca",
+            joinColumns = {@JoinColumn(name = "chassis")},
+            inverseJoinColumns = {@JoinColumn(name = "idPeca")}
+
+    )
+    private List<Peca> listaDePecasUtilizadas = new ArrayList<>();
 
     public Veiculo(){}
 
-    public Veiculo(String chassis, String modelo, int anoFabricacao, String cor, List<VeiculoPeca> listaDePecasUtilizadas) {
+    public Veiculo(String chassis, String modelo, int anoFabricacao, String cor, List<Peca> listaDePecasUtilizadas) {
         this.chassis = chassis;
         this.modelo = modelo;
         this.anoFabricacao = anoFabricacao;
@@ -65,11 +70,11 @@ public class Veiculo {
         this.cor = cor;
     }
 
-    public List<VeiculoPeca> getListaDePecasUtilizadas() {
+    public List<Peca> getListaDePecasUtilizadas() {
         return listaDePecasUtilizadas;
     }
 
-    public void setListaDePecasUtilizadas(List<VeiculoPeca> listaDePecasUtilizadas) {
+    public void setListaDePecasUtilizadas(List<Peca> listaDePecasUtilizadas) {
         this.listaDePecasUtilizadas = listaDePecasUtilizadas;
     }
 
@@ -79,21 +84,16 @@ public class Veiculo {
         if (o == null || getClass() != o.getClass()) return false;
 
         Veiculo veiculo = (Veiculo) o;
-
-        if (anoFabricacao != veiculo.anoFabricacao) return false;
-        if (!chassis.equals(veiculo.chassis)) return false;
-        if (!Objects.equals(modelo, veiculo.modelo)) return false;
-        if (!Objects.equals(cor, veiculo.cor)) return false;
-        return Objects.equals(listaDePecasUtilizadas, veiculo.listaDePecasUtilizadas);
+        return anoFabricacao == veiculo.anoFabricacao && chassis.equals(veiculo.chassis) && Objects.equals(modelo, veiculo.modelo) && Objects.equals(cor, veiculo.cor) && Objects.equals(listaDePecasUtilizadas, veiculo.listaDePecasUtilizadas);
     }
 
     @Override
     public int hashCode() {
         int result = chassis.hashCode();
-        result = 31 * result + (modelo != null ? modelo.hashCode() : 0);
+        result = 31 * result + Objects.hashCode(modelo);
         result = 31 * result + anoFabricacao;
-        result = 31 * result + (cor != null ? cor.hashCode() : 0);
-        result = 31 * result + (listaDePecasUtilizadas != null ? listaDePecasUtilizadas.hashCode() : 0);
+        result = 31 * result + Objects.hashCode(cor);
+        result = 31 * result + Objects.hashCode(listaDePecasUtilizadas);
         return result;
     }
 

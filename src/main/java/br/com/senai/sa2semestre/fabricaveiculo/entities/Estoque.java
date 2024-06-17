@@ -1,5 +1,6 @@
 package br.com.senai.sa2semestre.fabricaveiculo.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.util.Objects;
@@ -15,8 +16,10 @@ public class Estoque {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idEstoque;
     private int quantidadeDisponivel;
+
     @ManyToOne
     @JoinColumn(name = "idPeca", referencedColumnName = "idPeca")
+    @JsonBackReference
     private Peca peca;
 
     public Estoque(){}

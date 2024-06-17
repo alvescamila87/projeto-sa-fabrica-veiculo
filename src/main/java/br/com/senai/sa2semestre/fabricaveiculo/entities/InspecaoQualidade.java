@@ -1,5 +1,6 @@
 package br.com.senai.sa2semestre.fabricaveiculo.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -15,9 +16,11 @@ public class InspecaoQualidade {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idInspecao;
     private LocalDateTime dataHoraInspecao;
+
     @Enumerated(EnumType.STRING)
     private ResultadoInspecaoQualidade resultadoInspecaoQualidade;
     private String descricaoInspecaoQualidade;
+
     @ManyToOne
     @JoinColumn(name = "idProducao", referencedColumnName = "idProducao")
     private Producao producao;

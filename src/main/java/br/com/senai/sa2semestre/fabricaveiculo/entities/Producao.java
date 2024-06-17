@@ -1,8 +1,11 @@
 package br.com.senai.sa2semestre.fabricaveiculo.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -18,13 +21,16 @@ public class Producao {
     private Long idProducao;
     private LocalDateTime dataHora;
     private int quantidadeProduzida;
+
     @Enumerated(EnumType.STRING)
     private Estado estado;
+
     @ManyToOne
     @JoinColumn(name = "idPeca", referencedColumnName = "idPeca")
     private Peca peca;
+
     @OneToMany(mappedBy = "producao")
-    private List<InspecaoQualidade> listaDeInspecoesDeQualidade;
+    private List<InspecaoQualidade> listaDeInspecoesDeQualidade = new ArrayList<>();
 
 
     public Producao(){}

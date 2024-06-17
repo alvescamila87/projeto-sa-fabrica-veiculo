@@ -61,7 +61,7 @@ public class ManutencaoController {
      * @return a manutenção atualizada.
      */
     @PutMapping("/{id}")
-    public ResponseEntity<Manutencao> updateManutencao(@PathVariable Long id, Manutencao manutencaoParaAtualizar){
+    public ResponseEntity<Manutencao> updateManutencao(@PathVariable Long id, @RequestBody Manutencao manutencaoParaAtualizar){
         Optional<Manutencao> manutencaoPesquisada = manutencaoRepository.findById(id);
 
         if(manutencaoPesquisada.isPresent()){
