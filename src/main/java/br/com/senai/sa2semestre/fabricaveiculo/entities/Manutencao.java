@@ -21,6 +21,7 @@ public class Manutencao {
     @JoinColumn(name = "idEquipamento", referencedColumnName = "idEquipamento")
     @JsonBackReference
     private Equipamento equipamento;
+
     private LocalDateTime dataHoraInicio;
     private LocalDateTime dataHoraFim;
     private String descricaoServico;

@@ -1,5 +1,7 @@
 package br.com.senai.sa2semestre.fabricaveiculo.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -26,6 +28,8 @@ public class Veiculo {
             inverseJoinColumns = {@JoinColumn(name = "idPeca")}
 
     )
+    @JsonManagedReference
+    @JsonIgnore
     private List<Peca> listaDePecasUtilizadas = new ArrayList<>();
 
     public Veiculo(){}

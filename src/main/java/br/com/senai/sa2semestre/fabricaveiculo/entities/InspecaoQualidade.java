@@ -24,6 +24,7 @@ public class InspecaoQualidade {
 
     @ManyToOne
     @JoinColumn(name = "idProducao", referencedColumnName = "idProducao")
+    @JsonBackReference
     private Producao producao;
 
     public InspecaoQualidade(){}

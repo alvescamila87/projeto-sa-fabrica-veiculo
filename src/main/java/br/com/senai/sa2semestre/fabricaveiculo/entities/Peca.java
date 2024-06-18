@@ -1,5 +1,7 @@
 package br.com.senai.sa2semestre.fabricaveiculo.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
@@ -22,6 +24,8 @@ public class Peca {
     private int quantidadePecas;
 
     @ManyToMany
+    @JsonBackReference
+    @JsonIgnore
     private List<Veiculo> listaDeVeiculosComEssaPeca = new ArrayList<>();
 
     @OneToMany(mappedBy = "peca")

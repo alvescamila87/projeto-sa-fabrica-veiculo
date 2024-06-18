@@ -18,6 +18,7 @@ public class Equipamento {
     private Long idEquipamento;
     private String tipoEquipamento;
     private String descricao;
+
     @Enumerated(EnumType.STRING)
     private Estado estado;
 
