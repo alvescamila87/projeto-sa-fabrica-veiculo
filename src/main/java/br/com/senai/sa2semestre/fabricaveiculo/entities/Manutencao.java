@@ -7,9 +7,20 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 /**
- * Representa a manutenção e reparo dos equipamentos e peças ao
+ * Representa a manutenção e reparo dos equipamentos ao
  * longo do processo de produção de montagem do veículo.
+ *
+ * <p>
+ *  A entidade {@code Manutencao} está mapeada para a tabela "manutencoes" no banco de dados.
+ *  </p>
+ *
+ * @see Equipamento
+ *
+ * @author Camila
+ *
+ * @since V1
  */
+
 @Entity
 public class Manutencao {
 
@@ -29,10 +40,32 @@ public class Manutencao {
     @Enumerated(EnumType.STRING)
     private Estado estado;
 
+    /**
+     * Construtor padrão da classe {@code Manutencao}.
+     */
     public Manutencao(){
 
     }
 
+    /**
+     * Construtor completo, com todos os parâmetros para inicializar todos os atributos, a criação de objeto que representa o {@code Manutencao}.
+     *
+     * @param   idManutencao
+     *          O ID da manutenção.
+     * @param   equipamento
+     *          O equipamento relacionado à manutenção.
+     * @param   dataHoraInicio
+     *          A data e a hora de início da manutenção do equipamento.
+     * @param   dataHoraFim
+     *          A data e a hora de fim da manutenção do equipamento.
+     * @param   descricaoServico
+     *          A descrição do serviço de manutenção realizado no equipamento.
+     * @param   estado
+     *          O status da manutenção que pode ser encontrado em: Estado.
+     *
+     * @see Estado
+     * @see Equipamento
+     */
     public Manutencao(Long idManutencao, Equipamento equipamento, LocalDateTime dataHoraInicio, LocalDateTime dataHoraFim, String descricaoServico, Estado estado) {
         this.idManutencao = idManutencao;
         this.equipamento = equipamento;
@@ -120,7 +153,7 @@ public class Manutencao {
 
     /**
      * Exibe todas os atributos de manutenção
-     * @return Retorna uma representação em string do objeto Manutenção
+     * @return Retorna uma representação em string do objeto {@code Manutencao}.
      */
     @Override
     public String toString() {

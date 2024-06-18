@@ -1,14 +1,24 @@
 package br.com.senai.sa2semestre.fabricaveiculo.entities;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.List;
 import java.util.Objects;
 
 /**
- * Representa o equipamento, o maquinário e ferramentas
+ * Representa o equipamento, o maquinário e as ferramentas
  * utilizadas na montagem do veículo.
+ * Elas podem possuir manutenções associadas.
+ *
+ * <p>
+ *  A entidade {@code Equipamento} está mapeada para a tabela "equipamentos" no banco de dados.
+ *  </p>
+ *
+ * @see Manutencao
+ *
+ * @author Camila
+ *
+ * @since V1
  */
 @Entity
 public class Equipamento {
@@ -25,9 +35,29 @@ public class Equipamento {
     @OneToMany(mappedBy = "equipamento")
     private List<Manutencao> listaDeManutencoes;
 
+    /**
+     * Construtor padrão da classe {@code Equipamento}.
+     */
     public Equipamento() {
     }
 
+    /**
+     * Construtor completo, com todos os parâmetros para inicializar todos os atributos, a criação de objeto que representa o {@code Equipamento}.
+     *
+     * @param   idEquipamento
+     *          O ID do equipamento.
+     * @param   tipoEquipamento
+     *          O tipo de equipamento, equivalente a uma categoria de classificação.
+     * @param   descricao
+     *          A descrição do equipamento discorrendo a sua utilização
+     * @param   estado
+     *          O status do equipamento que pode ser encontrado em: Estado.
+     * @param   listaDeManutencoes
+     *          O equipamento pode possuir uma lista de manutenções, que pode ser checado o ID de relacionamento em Manutenções.
+     *
+     * @see Estado
+     * @see Manutencao
+     */
     public Equipamento(Long idEquipamento, String tipoEquipamento, String descricao, Estado estado, List<Manutencao> listaDeManutencoes) {
         this.idEquipamento = idEquipamento;
         this.tipoEquipamento = tipoEquipamento;
@@ -103,7 +133,7 @@ public class Equipamento {
 
     /**
      * Exibe todas os atributos de equipamento
-     * @return Retorna uma representação em string do objeto Equipamento
+     * @return Retorna uma representação em string do objeto {@code Equipamento}.
      */
     @Override
     public String toString() {

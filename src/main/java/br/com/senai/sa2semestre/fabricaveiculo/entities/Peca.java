@@ -2,7 +2,6 @@ package br.com.senai.sa2semestre.fabricaveiculo.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -11,7 +10,20 @@ import java.util.Objects;
 
 /**
  * Representa a peça que são os componentes individuais
- * utilizados na montagem do veículo.
+ * utilizados na linha de producao para a montagem do veículo.
+ * A peca está relacionada ao Veículo, Estoque e Produção.
+ *
+ * <p>
+ *  A entidade {@code Peca} está mapeada para a tabela "pecas" no banco de dados.
+ *  </p>
+ *
+ * @see Veiculo
+ * @see Estoque
+ * @see Producao
+ *
+ * @author Camila
+ *
+ * @since V1
  */
 @Entity
 public class Peca {
@@ -34,8 +46,32 @@ public class Peca {
     @OneToMany(mappedBy = "peca")
     private List<Producao> listaDePecasEmProducao = new ArrayList<>();
 
+    /**
+     * Construtor padrão da classe {@code Peca}.
+     */
     public Peca(){}
 
+    /**
+     * Construtor completo, com todos os parâmetros para inicializar todos os atributos, a criação de objeto que representa o {@code Peca}.
+     * @param   idPeca
+     *          O ID da peça.
+     * @param   nome
+     *          O nome equivalente a uma categoria de classificação da peça.
+     * @param   descricao
+     *          A descrição da peça discorrendo a sua utilização.
+     * @param   quantidadePecas
+     *          A quantidade de peças utilizadas na montagem daquele chassis de veículo.
+     * @param   listaDeVeiculosComEssaPeca
+     *          A peça pode possuir uma lista de veículos, que pode ser checado o chassis de relacionamento em Veículos.
+     * @param   listaDePecasEmEstoque
+     *          A peça  pode possuir uma lista de manutenções, que pode ser checado o ID de relacionamento em Estoque.
+     * @param   listaDePecasEmProducao
+     *          A peça  pode possuir uma lista de manutenções, que pode ser checado o ID em Produção.
+     *
+     * @see Veiculo
+     * @see Producao
+     * @see Estoque
+     */
     public Peca(Long idPeca, String nome, String descricao, int quantidadePecas, List<Veiculo> listaDeVeiculosComEssaPeca, List<Estoque> listaDePecasEmEstoque, List<Producao> listaDePecasEmProducao) {
         this.idPeca = idPeca;
         this.nome = nome;
@@ -125,7 +161,7 @@ public class Peca {
 
     /**
      * Exibe todas os atributos de peça
-     * @return Retorna uma representação em string do objeto Peça
+     * @return Retorna uma representação em string do objeto {@code Peca}.
      */
     @Override
     public String toString() {

@@ -5,8 +5,19 @@ import jakarta.persistence.*;
 import java.util.Objects;
 
 /**
- * Representa o usuário de acesso
+ * Representa o usuário de acesso à aplicação que pode ter um perfil para controle de acesso.
+ *
+ * <p>
+ *  A entidade {@code Usuario} está mapeada para a tabela "usuarios" no banco de dados.
+ *  </p>
+ *
+ * @see Perfil
+ *
+ * @author Camila
+ *
+ * @since V1
  */
+
 @Entity
 public class Usuario {
 
@@ -20,9 +31,27 @@ public class Usuario {
     @Enumerated(EnumType.STRING)
     private Perfil perfil;
 
-    public Usuario(){
+    /**
+     * Construtor padrão da classe {@code Usuario}.
+     */
+    public Usuario(){}
 
-    }
+    /**
+     * Construtor completo, com todos os parâmetros para inicializar todos os atributos, a criação de objeto que representa o {@code Usuario}.
+     *
+     * @param   idUsuario
+     *          O ID do usuário de acesso.
+     * @param   nome
+     *          O nome do usuário: pode ser o nome completo.
+     * @param   email
+     *          O email do usuário como login de acesso.
+     * @param   senha
+     *          A senha do usuário de acesso.
+     * @param   perfil
+     *          O perfil de acesso do usuário que pode ser encontrado em: Perfil.
+     *
+     * @see Perfil
+     */
     public Usuario(Long idUsuario, String nome, String email, String senha, Perfil perfil) {
         this.idUsuario = idUsuario;
         this.nome = nome;
@@ -97,7 +126,7 @@ public class Usuario {
 
     /**
      * Exibe todas os atributos de usuário
-     * @return Retorna uma representação em string do objeto Usuário
+     * @return Retorna uma representação em string do objeto {@code Usuario}.
      */
     @Override
     public String toString() {

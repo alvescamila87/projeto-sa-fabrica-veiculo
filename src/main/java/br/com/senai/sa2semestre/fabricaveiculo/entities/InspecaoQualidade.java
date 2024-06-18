@@ -1,15 +1,24 @@
 package br.com.senai.sa2semestre.fabricaveiculo.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
 
 /**
- * Representa a inspeção de qualidade que deve garantir
- * que o veículo finalizado atenda aos padrões de qualidade e segurança.
+ * Representa a inspeção de qualidade que deve garantir que, o veículo que possui sua montagem na linha de produção finalizada,
+ * atenda aos padrões de qualidade e segurança da regulamentação nacional.
+ *
+ * <p>
+ *  A entidade {@code InspecaoQualidade} está mapeada para a tabela "qualidades" no banco de dados.
+ *  </p>
+ *
+ * @see Producao
+ *
+ * @author Camila
+ *
+ * @since V1
  */
 @Entity
 public class InspecaoQualidade {
@@ -27,8 +36,26 @@ public class InspecaoQualidade {
     @JsonBackReference
     private Producao producao;
 
+    /**
+     * Construtor padrão da classe {@code InspecaoQualidade}.
+     */
     public InspecaoQualidade(){}
 
+    /**
+     * Construtor completo, com todos os parâmetros para inicializar todos os atributos, a criação de objeto que representa o {@code InspecaoQualidade}.
+     * @param   idInspecao
+     *          O ID da inspeção de qualidade
+     * @param   dataHoraInspecao
+     *          A data e hora da inspeção
+     * @param   resultadoInspecaoQualidade
+     *          O resultado da inspeção de qualidade realizada, checar as situaçãos/estados em: Resultado das Inspeções de Qualidade.
+     * @param   descricaoInspecaoQualidade
+     *          A descrição relacionado ao resultado da insperação de qualidade realizada.
+     * @param   producao
+     *          A produção (a montagem) relacionada à inspeção de qualidade.
+     *
+     * @see ResultadoInspecaoQualidade
+     */
     public InspecaoQualidade(Long idInspecao, LocalDateTime dataHoraInspecao, ResultadoInspecaoQualidade resultadoInspecaoQualidade, String descricaoInspecaoQualidade, Producao producao) {
         this.idInspecao = idInspecao;
         this.dataHoraInspecao = dataHoraInspecao;
@@ -103,6 +130,10 @@ public class InspecaoQualidade {
         return result;
     }
 
+    /**
+     * Exibe todas os atributos de inspeção de qualidade
+     * @return Retorna uma representação em string do objeto {@code InspecaoQualidade}.
+     */
     @Override
     public String toString() {
         return "INSPEÇÃO DE QUALIDADE [" +

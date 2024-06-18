@@ -10,8 +10,18 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Representa a produção, ou seja, o processo de montagem do veículo,
- * utilizando peças e equipamentos.
+ * Representa a produção, ou seja, o processo da linha de montagem do veículo,
+ * utilizando peças, componentes. Possui inspeção de qualidade ao final do ciclo de produção.
+ *
+ * <p>
+ *  A entidade {@code Producao} está mapeada para a tabela "producoes" no banco de dados.
+ *  </p>
+ *
+ * @see InspecaoQualidade
+ *
+ * @author Camila
+ *
+ * @since V1
  */
 @Entity
 public class Producao {
@@ -33,9 +43,27 @@ public class Producao {
     @OneToMany(mappedBy = "producao")
     private List<InspecaoQualidade> listaDeInspecoesDeQualidade = new ArrayList<>();
 
-
+    /**
+     * Construtor padrão da classe {@code Producao}.
+     */
     public Producao(){}
 
+    /**
+     * Construtor completo, com todos os parâmetros para inicializar todos os atributos, a criação de objeto que representa o {@code Producao}.
+     *
+     * @param   idProducao
+     *          O ID de produção
+     * @param   dataHora
+     *          A data e hora que ocorreu a produção (montagem do veículo).
+     * @param   quantidadeProduzida
+     *          Quantidade de montagens de veículos de chassis / modelos realizados.
+     * @param   estado
+     *          O status da produção que pode ser encontrado em: Estado.
+     * @param   peca
+     *          A peça relacionada à linha de produção do veículo.
+     * @param   listaDeInspecoesDeQualidade
+     *          A produção pode possuir uma lista de inspeções de qualidade, que pode ser checado o ID de relacionamento em Inspeções de qualidade.
+     */
     public Producao(Long idProducao, LocalDateTime dataHora, int quantidadeProduzida, Estado estado, Peca peca, List<InspecaoQualidade> listaDeInspecoesDeQualidade) {
         this.idProducao = idProducao;
         this.dataHora = dataHora;
@@ -119,6 +147,10 @@ public class Producao {
         return result;
     }
 
+    /**
+     * Exibe todas os atributos de equipamento
+     * @return Retorna uma representação em string do objeto {@code Producao}.
+     */
     @Override
     public String toString() {
         return "PRODUÇÃO [" +

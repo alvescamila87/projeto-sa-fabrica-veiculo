@@ -9,9 +9,18 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Representa o veículo a ser montado, ou seja,
- * o produto final da linha de montagem.
+ * Representa o veículo a ser montado com as peças de acordo com o chassis, ou seja, o produto final da fábrica na linha de produção.
+ * <p>
+ *  A entidade {@code Veiculo} está mapeada para a tabela "veiculos" no banco de dados.
+ *  </p>
+ *
+ * @see Peca
+ *
+ * @author Camila
+ *
+ * @since V1
  */
+
 @Entity
 public class Veiculo {
 
@@ -32,8 +41,27 @@ public class Veiculo {
     @JsonIgnore
     private List<Peca> listaDePecasUtilizadas = new ArrayList<>();
 
+    /**
+     * Construtor padrão da classe {@code Veiculo}.
+     */
     public Veiculo(){}
 
+    /**
+     * Construtor completo, com todos os parâmetros para inicializar todos os atributos, a criação de objeto que representa o {@code Veiculo}.
+     *
+     * @param   chassis
+     *          O chassis do veículo (código).
+     * @param   modelo
+     *          O modelo do veículo relacionado à marca da fábrica de montagem.
+     * @param   anoFabricacao
+     *          O ano de fabricação do veículo que será a de produção do veículo.
+     * @param   cor
+     *          A cor do veículo.
+     * @param   listaDePecasUtilizadas
+     *          O veículo pode possuir uma lista de peças, que pode ser checado o ID de relacionamento em Peças.
+     *
+     * @see Peca
+     */
     public Veiculo(String chassis, String modelo, int anoFabricacao, String cor, List<Peca> listaDePecasUtilizadas) {
         this.chassis = chassis;
         this.modelo = modelo;
@@ -103,7 +131,7 @@ public class Veiculo {
 
     /**
      * Exibe todas os atributos de veículo
-     * @return Retorna uma representação em string do objeto Veículo
+     * @return Retorna uma representação em string do objeto {@code Veiculo}.
      */
     @Override
     public String toString() {
