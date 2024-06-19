@@ -11,7 +11,18 @@ import java.util.Optional;
 
 /**
  * Controlador REST para gerenciamento de estoque.
+ *
+ * <p>
+ *     Este controlador possui os endpoints para: criar, atualizar, excluir e consultar informações de {@code Estoque}.
+ * </p>
+ *
+ * @see Estoque
+ * @see EstoqueRepository
+ *
+ * @author Camila
+ * @since V1
  */
+
 @RestController
 @RequestMapping("/estoques")
 public class EstoqueController {

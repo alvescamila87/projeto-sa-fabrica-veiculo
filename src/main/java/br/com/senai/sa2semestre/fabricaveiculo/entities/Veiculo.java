@@ -1,7 +1,5 @@
 package br.com.senai.sa2semestre.fabricaveiculo.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -32,14 +30,12 @@ public class Veiculo {
 
     @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(
-            name = "veiculo_peca",
+            name = "veiculos_pecas",
             joinColumns = {@JoinColumn(name = "chassis")},
             inverseJoinColumns = {@JoinColumn(name = "idPeca")}
 
     )
-    @JsonManagedReference
-    @JsonIgnore
-    private List<Peca> listaDePecasUtilizadas = new ArrayList<>();
+    private List<Peca> listaDePecasUtilizadasNoVeiculo = new ArrayList<>();
 
     /**
      * Construtor padrão da classe {@code Veiculo}.
@@ -57,17 +53,17 @@ public class Veiculo {
      *          O ano de fabricação do veículo que será a de produção do veículo.
      * @param   cor
      *          A cor do veículo.
-     * @param   listaDePecasUtilizadas
+     * @param   listaDePecasUtilizadasNoVeiculo
      *          O veículo pode possuir uma lista de peças, que pode ser checado o ID de relacionamento em Peças.
      *
      * @see Peca
      */
-    public Veiculo(String chassis, String modelo, int anoFabricacao, String cor, List<Peca> listaDePecasUtilizadas) {
+    public Veiculo(String chassis, String modelo, int anoFabricacao, String cor, List<Peca> listaDePecasUtilizadasNoVeiculo) {
         this.chassis = chassis;
         this.modelo = modelo;
         this.anoFabricacao = anoFabricacao;
         this.cor = cor;
-        this.listaDePecasUtilizadas = listaDePecasUtilizadas;
+        this.listaDePecasUtilizadasNoVeiculo = listaDePecasUtilizadasNoVeiculo;
     }
 
     public String getChassis() {
@@ -103,11 +99,11 @@ public class Veiculo {
     }
 
     public List<Peca> getListaDePecasUtilizadas() {
-        return listaDePecasUtilizadas;
+        return listaDePecasUtilizadasNoVeiculo;
     }
 
     public void setListaDePecasUtilizadas(List<Peca> listaDePecasUtilizadas) {
-        this.listaDePecasUtilizadas = listaDePecasUtilizadas;
+        this.listaDePecasUtilizadasNoVeiculo = listaDePecasUtilizadas;
     }
 
     @Override
@@ -116,7 +112,7 @@ public class Veiculo {
         if (o == null || getClass() != o.getClass()) return false;
 
         Veiculo veiculo = (Veiculo) o;
-        return anoFabricacao == veiculo.anoFabricacao && chassis.equals(veiculo.chassis) && Objects.equals(modelo, veiculo.modelo) && Objects.equals(cor, veiculo.cor) && Objects.equals(listaDePecasUtilizadas, veiculo.listaDePecasUtilizadas);
+        return anoFabricacao == veiculo.anoFabricacao && chassis.equals(veiculo.chassis) && Objects.equals(modelo, veiculo.modelo) && Objects.equals(cor, veiculo.cor) && Objects.equals(listaDePecasUtilizadasNoVeiculo, veiculo.listaDePecasUtilizadasNoVeiculo);
     }
 
     @Override
@@ -125,7 +121,7 @@ public class Veiculo {
         result = 31 * result + Objects.hashCode(modelo);
         result = 31 * result + anoFabricacao;
         result = 31 * result + Objects.hashCode(cor);
-        result = 31 * result + Objects.hashCode(listaDePecasUtilizadas);
+        result = 31 * result + Objects.hashCode(listaDePecasUtilizadasNoVeiculo);
         return result;
     }
 
@@ -140,7 +136,7 @@ public class Veiculo {
                 ", Modelo: " + modelo +
                 ", Ano de fabricação: " + anoFabricacao +
                 ", Cor: " + cor +
-                ", Lista de peças utilizadas: " + listaDePecasUtilizadas +
+                ", Lista de peças utilizadas no veículo: " + listaDePecasUtilizadasNoVeiculo +
                 ']';
     }
 }

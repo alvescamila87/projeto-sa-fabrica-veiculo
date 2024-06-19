@@ -11,6 +11,16 @@ import java.util.Optional;
 
 /**
  * Controlador REST para gerenciamento de veículos.
+ *
+ * <p>
+ *     Este controlador possui os endpoints para: criar, atualizar, excluir e consultar informações de {@code Veiculo}.
+ * </p>
+ *
+ * @see Veiculo
+ * @see VeiculoRepository
+ *
+ * @author Camila
+ * @since V1
  */
 @RestController
 @RequestMapping("/veiculos")
@@ -88,6 +98,4 @@ public class VeiculoController {
             return ResponseEntity.notFound().build();
         }
     }
-
-
 }

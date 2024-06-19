@@ -11,6 +11,16 @@ import java.util.Optional;
 
 /**
  * Controlador REST para gerenciamento de peças.
+ *
+ * <p>
+ *     Este controlador possui os endpoints para: criar, atualizar, excluir e consultar informações de {@code Peca}.
+ * </p>
+ *
+ * @see Peca
+ * @see PecaRepository
+ *
+ * @author Camila
+ * @since V1
  */
 @RestController
 @RequestMapping("/pecas")

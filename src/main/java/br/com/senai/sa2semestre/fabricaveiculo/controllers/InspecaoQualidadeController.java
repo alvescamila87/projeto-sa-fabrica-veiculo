@@ -11,6 +11,16 @@ import java.util.Optional;
 
 /**
  * Controlador REST para gerenciamento de inspeções de qualidade.
+ *
+ * <p>
+ *     Este controlador possui os endpoints para: criar, atualizar, excluir e consultar informações de {@code InspecaoQualidade}.
+ * </p>
+ *
+ * @see InspecaoQualidade
+ * @see InspecaoQualidadeRepository
+ *
+ * @author Camila
+ * @since V1
  */
 @RestController
 @RequestMapping("/inspecoes")

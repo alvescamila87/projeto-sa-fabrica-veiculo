@@ -9,6 +9,19 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Controlador REST para gerenciamento da linha de produção (da montagem de veículos).
+ *
+ * <p>
+ *     Este controlador possui os endpoints para: criar, atualizar, excluir e consultar informações de {@code Producao}.
+ * </p>
+ *
+ * @see Producao
+ * @see ProducaoRepository
+ *
+ * @author Camila
+ * @since V1
+ */
 @RestController
 @RequestMapping("/producoes")
 public class ProducaoController {
