@@ -11,7 +11,7 @@ Uma aplicação Java/Spring desenvolvida pela startup "Tech Solutions" em parcer
 * Postman
 
 ## DER - Diagrama de entidade e relacionamento da S.A 
-![image](https://github.com/alvescamila87/projeto-sa-fabrica-veiculo/assets/116912821/3a96c255-8012-4ae5-8aba-094e436f9acf)
+![image](https://github.com/alvescamila87/projeto-sa-fabrica-veiculo/assets/116912821/d8ac0ec4-98af-4382-9d7c-b46a86484fee)
 
 ## Autor
 * Camila Alves
