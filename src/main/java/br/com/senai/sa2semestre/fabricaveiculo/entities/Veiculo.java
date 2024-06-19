@@ -1,5 +1,6 @@
 package br.com.senai.sa2semestre.fabricaveiculo.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -35,6 +36,7 @@ public class Veiculo {
             inverseJoinColumns = {@JoinColumn(name = "idPeca")}
 
     )
+    @JsonIgnore
     private List<Peca> listaDePecasUtilizadasNoVeiculo = new ArrayList<>();
 
     /**
@@ -98,12 +100,12 @@ public class Veiculo {
         this.cor = cor;
     }
 
-    public List<Peca> getListaDePecasUtilizadas() {
+    public List<Peca> getListaDePecasUtilizadasNoVeiculo() {
         return listaDePecasUtilizadasNoVeiculo;
     }
 
-    public void setListaDePecasUtilizadas(List<Peca> listaDePecasUtilizadas) {
-        this.listaDePecasUtilizadasNoVeiculo = listaDePecasUtilizadas;
+    public void setListaDePecasUtilizadasNoVeiculo(List<Peca> listaDePecasUtilizadasNoVeiculo) {
+        this.listaDePecasUtilizadasNoVeiculo = listaDePecasUtilizadasNoVeiculo;
     }
 
     @Override
@@ -112,16 +114,21 @@ public class Veiculo {
         if (o == null || getClass() != o.getClass()) return false;
 
         Veiculo veiculo = (Veiculo) o;
-        return anoFabricacao == veiculo.anoFabricacao && chassis.equals(veiculo.chassis) && Objects.equals(modelo, veiculo.modelo) && Objects.equals(cor, veiculo.cor) && Objects.equals(listaDePecasUtilizadasNoVeiculo, veiculo.listaDePecasUtilizadasNoVeiculo);
+
+        if (anoFabricacao != veiculo.anoFabricacao) return false;
+        if (!chassis.equals(veiculo.chassis)) return false;
+        if (!Objects.equals(modelo, veiculo.modelo)) return false;
+        if (!Objects.equals(cor, veiculo.cor)) return false;
+        return Objects.equals(listaDePecasUtilizadasNoVeiculo, veiculo.listaDePecasUtilizadasNoVeiculo);
     }
 
     @Override
     public int hashCode() {
         int result = chassis.hashCode();
-        result = 31 * result + Objects.hashCode(modelo);
+        result = 31 * result + (modelo != null ? modelo.hashCode() : 0);
         result = 31 * result + anoFabricacao;
-        result = 31 * result + Objects.hashCode(cor);
-        result = 31 * result + Objects.hashCode(listaDePecasUtilizadasNoVeiculo);
+        result = 31 * result + (cor != null ? cor.hashCode() : 0);
+        result = 31 * result + (listaDePecasUtilizadasNoVeiculo != null ? listaDePecasUtilizadasNoVeiculo.hashCode() : 0);
         return result;
     }
 
