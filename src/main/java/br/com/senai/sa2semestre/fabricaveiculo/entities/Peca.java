@@ -38,10 +38,10 @@ public class Peca {
     @JsonIgnore
     private List<Veiculo> listaDeVeiculosComEssaPeca = new ArrayList<>();
 
-    @OneToMany(mappedBy = "peca")
+    @OneToMany(mappedBy = "peca", cascade = CascadeType.ALL)
     private List<Estoque> listaDePecasEmEstoque = new ArrayList<>();
 
-    @OneToMany(mappedBy = "peca")
+    @OneToMany(mappedBy = "peca", cascade = CascadeType.ALL)
     private List<Producao> listaDePecasEmProducao = new ArrayList<>();
 
     /**

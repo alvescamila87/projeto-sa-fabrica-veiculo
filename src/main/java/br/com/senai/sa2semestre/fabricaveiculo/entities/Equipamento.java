@@ -32,7 +32,7 @@ public class Equipamento {
     @Enumerated(EnumType.STRING)
     private Estado estado;
 
-    @OneToMany(mappedBy = "equipamento")
+    @OneToMany(mappedBy = "equipamento", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Manutencao> listaDeManutencoes;
 
     /**

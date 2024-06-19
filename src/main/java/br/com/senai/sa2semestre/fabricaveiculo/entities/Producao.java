@@ -40,7 +40,7 @@ public class Producao {
     @JsonBackReference
     private Peca peca;
 
-    @OneToMany(mappedBy = "producao")
+    @OneToMany(mappedBy = "producao", cascade = CascadeType.ALL)
     private List<InspecaoQualidade> listaDeInspecoesDeQualidade = new ArrayList<>();
 
     /**
