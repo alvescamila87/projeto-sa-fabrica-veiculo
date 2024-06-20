@@ -6,8 +6,8 @@ Uma aplicação Java/Spring desenvolvida pela startup "Tech Solutions" em parcer
 ## DER - Diagrama de entidade e relacionamento da S.A 
 ![image](https://github.com/alvescamila87/projeto-sa-fabrica-veiculo/assets/116912821/d8ac0ec4-98af-4382-9d7c-b46a86484fee)
 
-## Test JSON
-### Post PECA
+## JSON Example
+### JSON Post PECA
 ```json
 {
   "nome": "Motor",
@@ -15,7 +15,7 @@ Uma aplicação Java/Spring desenvolvida pela startup "Tech Solutions" em parcer
   "quantidadePecas": 100
 }
 ```
-### Post VEICULO
+### JSON Post VEICULO
 ```json
 {
   "chassis": "ABC123456789DEF01",
@@ -39,7 +39,7 @@ Uma aplicação Java/Spring desenvolvida pela startup "Tech Solutions" em parcer
 }
 ```
 
-### Post ESTOQUE
+### JSON Post ESTOQUE
 ```json
 {
   "quantidadeDisponivel": 50,
