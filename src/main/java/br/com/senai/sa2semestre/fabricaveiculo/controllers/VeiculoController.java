@@ -2,6 +2,11 @@ package br.com.senai.sa2semestre.fabricaveiculo.controllers;
 
 import br.com.senai.sa2semestre.fabricaveiculo.entities.Veiculo;
 import br.com.senai.sa2semestre.fabricaveiculo.repositories.VeiculoRepository;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +29,7 @@ import java.util.Optional;
  */
 @RestController
 @RequestMapping("/veiculos")
+@Tag(name = "Veículo", description = "Endpoints para gerenciamento de veículo")
 public class VeiculoController {
 
     @Autowired
@@ -33,6 +39,11 @@ public class VeiculoController {
      * Obtém todos os veículos
      * @return uma lista de veículos cadastrados.
      */
+    @Operation(summary = "Obtém todos os veículos")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Lista de veículos obtida com sucesso", content = @Content),
+            @ApiResponse(responseCode = "500", description = "Erro interno do servidor", content = @Content)
+    })
     @GetMapping
     public List<Veiculo> getAllVeiculos(){
         return veiculoRepository.findAll();
@@ -43,6 +54,12 @@ public class VeiculoController {
      * @param chassis é o chassis do veículo
      * @return o veículo com o chassis especificado.
      */
+    @Operation(summary = "Obtém o veículo por ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Veículo encontrado"),
+            @ApiResponse(responseCode = "404", description = "Veículo não encontrado"),
+            @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    })
     @GetMapping("/{chassis}")
     public ResponseEntity<Veiculo> getVeiculoByChassis(@PathVariable String chassis){
         Optional<Veiculo> veiculoPesquisado = veiculoRepository.findById(chassis);
@@ -59,6 +76,11 @@ public class VeiculoController {
      * @param veiculo dados do novo veículo
      * @return o novo veículo criado.
      */
+    @Operation(summary = "Cria um novo veículo")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Veículo criado com sucesso"),
+            @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    })
     @PostMapping
     public Veiculo createVeiculo(@RequestBody Veiculo veiculo){
         return veiculoRepository.save(veiculo);
@@ -70,6 +92,12 @@ public class VeiculoController {
      * @param veiculoParaAtualizar os novos dados do veículo
      * @return o veículo atualizado
      */
+    @Operation(summary = "Atualiza as informações do veículo por ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Veículo atualizado com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Veículo não encontrado"),
+            @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    })
     @PutMapping("/{chassis}")
     public ResponseEntity<Veiculo> updateVeiculo(@PathVariable String chassis, @RequestBody Veiculo veiculoParaAtualizar){
         Optional<Veiculo> veiculoPesquisado = veiculoRepository.findById(chassis);
@@ -87,6 +115,12 @@ public class VeiculoController {
      * @param chassis do veículo a ser excluído
      * @return uma resposta indicando sucesso ou falha da operação
      */
+    @Operation(summary = "Remove o veículo por ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Veículo removido com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Veículo não encontrado"),
+            @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    })
     @DeleteMapping("/{chassis}")
     public ResponseEntity<Void> deleteVeiculo(@PathVariable String chassis){
         Optional<Veiculo> veiculoPesquisado = veiculoRepository.findById(chassis);

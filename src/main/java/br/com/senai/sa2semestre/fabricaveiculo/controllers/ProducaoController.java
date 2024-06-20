@@ -2,6 +2,10 @@ package br.com.senai.sa2semestre.fabricaveiculo.controllers;
 
 import br.com.senai.sa2semestre.fabricaveiculo.entities.Producao;
 import br.com.senai.sa2semestre.fabricaveiculo.repositories.ProducaoRepository;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +28,7 @@ import java.util.Optional;
  */
 @RestController
 @RequestMapping("/producoes")
+@Tag(name = "Produções", description = "Endpoints para gerenciamento de produções")
 public class ProducaoController {
 
     @Autowired
@@ -33,6 +38,11 @@ public class ProducaoController {
      * Obtém todos as produções de montagem cadastradas
      * @return uma lista de produções de montagems cadastradas
      */
+    @Operation(summary = "Obtém todas as produções")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Lista de produções encontrada"),
+            @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    })
     @GetMapping
     public List<Producao> getAllProducoes() {
         return producaoRepository.findAll();
@@ -43,6 +53,12 @@ public class ProducaoController {
      * @param id da produção a ser pesquisada
      * @return a produção encontrda de acordo com o ID fornecido
      */
+    @Operation(summary = "Obtém uma produção por ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Produção encontrada"),
+            @ApiResponse(responseCode = "404", description = "Produção não encontrada"),
+            @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    })
     @GetMapping("/{id}")
     public ResponseEntity<Producao> getProducaoById(@PathVariable Long id) {
         Optional<Producao> producaoPesquisada = producaoRepository.findById(id);
@@ -59,6 +75,11 @@ public class ProducaoController {
      * @param producao os dados da nova produção de montagem
      * @return a nova produção de montagem criada
      */
+    @Operation(summary = "Cria uma nova produção")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Produção criada com sucesso"),
+            @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    })
     @PostMapping
     public ResponseEntity<Producao> createProducao(@RequestBody Producao producao) {
         return ResponseEntity.ok(producaoRepository.save(producao));
@@ -70,6 +91,12 @@ public class ProducaoController {
      * @param producaoParaAtualizar novos dados para atualizar produção da montagem
      * @return a produção com os dados atualizados
      */
+    @Operation(summary = "Atualiza uma produção existente")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Produção atualizada"),
+            @ApiResponse(responseCode = "404", description = "Produção não encontrada"),
+            @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    })
     @PutMapping("/{id}")
     public ResponseEntity<Producao> updateProducao(@PathVariable Long id, @RequestBody Producao producaoParaAtualizar) {
         Optional<Producao> producaoPesquisada = producaoRepository.findById(id);
@@ -87,6 +114,12 @@ public class ProducaoController {
      * @param id´da produco para remover
      * @return mensagem de falha ou sucesso da operação
      */
+    @Operation(summary = "Exclui uma produção por ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Produção excluída com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Produção não encontrada"),
+            @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    })
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteProducao(@PathVariable Long id){
         Optional<Producao> producaoPesquisada = producaoRepository.findById(id);

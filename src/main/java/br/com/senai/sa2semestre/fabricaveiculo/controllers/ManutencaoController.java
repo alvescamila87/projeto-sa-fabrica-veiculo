@@ -2,6 +2,10 @@ package br.com.senai.sa2semestre.fabricaveiculo.controllers;
 
 import br.com.senai.sa2semestre.fabricaveiculo.entities.Manutencao;
 import br.com.senai.sa2semestre.fabricaveiculo.repositories.ManutencaoRepository;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +28,7 @@ import java.util.Optional;
  */
 @RestController
 @RequestMapping("/manutencoes")
+@Tag(name = "Manutenções", description = "Endpoints para gerenciamento de manutenções")
 public class ManutencaoController {
 
     @Autowired
@@ -33,6 +38,11 @@ public class ManutencaoController {
      * Obtém todas as manutenções.
      * @return uma lista de manutenções.
      */
+    @Operation(summary = "Obtém todas as manutenções")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Lista de manutenções encontrada"),
+            @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    })
     @GetMapping
     public List<Manutencao> getAllManutencoes(){
         return manutencaoRepository.findAll();
@@ -43,6 +53,12 @@ public class ManutencaoController {
      * @param id o ID da manutenção.
      * @return a manutenção com o ID especificado.
      */
+    @Operation(summary = "Obtém uma manutenção por ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Manutenção encontrada"),
+            @ApiResponse(responseCode = "404", description = "Manutenção não encontrada"),
+            @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    })
     @GetMapping("{id}")
     public ResponseEntity<Manutencao> getManutencaoById(@PathVariable Long id){
         Optional<Manutencao> manutencaoPesquisada = manutencaoRepository.findById(id);
@@ -59,6 +75,11 @@ public class ManutencaoController {
      * @param manutencao dados da nova manutenção.
      * @return a nova manutenção criada.
      */
+    @Operation(summary = "Cria uma nova manutenção")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Manutenção criada com sucesso"),
+            @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    })
     @PostMapping
     public Manutencao createManutencao(@RequestBody Manutencao manutencao){
         return manutencaoRepository.save(manutencao);
@@ -70,6 +91,12 @@ public class ManutencaoController {
      * @param manutencaoParaAtualizar os novos dados da manutenção.
      * @return a manutenção atualizada.
      */
+    @Operation(summary = "Atualiza uma manutenção existente")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Manutenção atualizada"),
+            @ApiResponse(responseCode = "404", description = "Manutenção não encontrada"),
+            @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    })
     @PutMapping("/{id}")
     public ResponseEntity<Manutencao> updateManutencao(@PathVariable Long id, @RequestBody Manutencao manutencaoParaAtualizar){
         Optional<Manutencao> manutencaoPesquisada = manutencaoRepository.findById(id);
@@ -87,6 +114,12 @@ public class ManutencaoController {
      * @param id o ID da manutenção a ser excluída.
      * @return uma resposta indicando o sucesso ou falha da operação.
      */
+    @Operation(summary = "Exclui uma manutenção por ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Manutenção excluída com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Manutenção não encontrada"),
+            @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
+    })
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteManutencao(@PathVariable Long id){
         Optional<Manutencao> manutencaoPesquisada = manutencaoRepository.findById(id);
