@@ -29,7 +29,7 @@ import java.util.Optional;
  */
 @RestController
 @RequestMapping("/veiculos")
-@Tag(name = "Veículo", description = "Endpoints para gerenciamento de veículo")
+@Tag(name = "Veículos", description = "Endpoints para gerenciamento de veículo")
 public class VeiculoController {
 
     @Autowired

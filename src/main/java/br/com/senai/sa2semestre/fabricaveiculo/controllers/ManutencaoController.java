@@ -28,7 +28,7 @@ import java.util.Optional;
  */
 @RestController
 @RequestMapping("/manutencoes")
-@Tag(name = "Manutenções", description = "Endpoints para gerenciamento de manutenções")
+@Tag(name = "Manutenções", description = "Endpoints para gerenciamento de manutenções de equipamentos")
 public class ManutencaoController {
 
     @Autowired

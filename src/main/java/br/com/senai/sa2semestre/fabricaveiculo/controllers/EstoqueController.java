@@ -30,7 +30,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/estoques")
-@Tag(name = "Estoque", description = "Endpoints para gerenciamento de estoque")
+@Tag(name = "Estoques", description = "Endpoints para gerenciamento de estoque de peças")
 public class EstoqueController {
 
     @Autowired

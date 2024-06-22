@@ -28,7 +28,7 @@ import java.util.Optional;
  */
 @RestController
 @RequestMapping("/inspecoes")
-@Tag(name = "InspecaoQualidade", description = "Endpoints para gerenciamento de inspeções de qualidade")
+@Tag(name = "Inspeções de Qualidade", description = "Endpoints para gerenciamento de inspeções de qualidade")
 public class InspecaoQualidadeController {
 
     @Autowired

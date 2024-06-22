@@ -52,7 +52,7 @@ Uma aplicação Java/Spring desenvolvida pela startup "Tech Solutions" em parcer
 ## Tecnologias
 * Java (Maven)
 * Spring (Boot, JPA, Devtools)
-* Swagger (OpenAI Doc)
+* Swagger (OpenAPI Doc)
 * Banco de dados em memória (H2)
 * JavaDoc
 * Postman
