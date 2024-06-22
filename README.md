@@ -44,7 +44,7 @@ Uma aplicação Java/Spring desenvolvida pela startup "Tech Solutions" em parcer
 * Postman
 
 ## Swagger
-![image](https://github.com/alvescamila87/projeto-sa-fabrica-veiculo/assets/116912821/81101f57-cc0b-4490-953b-8e8376538a80)
+![image](https://github.com/alvescamila87/projeto-sa-fabrica-veiculo/assets/116912821/317f7520-353f-476f-b6bc-d44ff98efe7f)
 
 
 ## Autor
