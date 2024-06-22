@@ -41,6 +41,7 @@ Uma aplicação Java/Spring desenvolvida pela startup "Tech Solutions" em parcer
 * Swagger (OpenAPI Doc)
 * Banco de dados em memória (H2)
 * JavaDoc
+* Exception Handler
 * Postman
 
 ## Swagger
