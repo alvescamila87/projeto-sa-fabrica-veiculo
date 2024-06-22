@@ -1,6 +1,7 @@
 package br.com.senai.sa2semestre.fabricaveiculo.controllers;
 
 import br.com.senai.sa2semestre.fabricaveiculo.entities.Usuario;
+import br.com.senai.sa2semestre.fabricaveiculo.exceptions.NotFoundException;
 import br.com.senai.sa2semestre.fabricaveiculo.repositories.UsuarioRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -52,6 +53,7 @@ public class UsuarioController {
      * Obtém um usuário por ID.
      * @param id o ID do usuário.
      * @return o usuário com o ID especificado.
+     * @throws NotFoundException se o usuário com o ID especificado não for encontradp.
      */
     @Operation(summary = "Obtém o usuário por ID")
     @ApiResponses(value = {
@@ -66,7 +68,7 @@ public class UsuarioController {
         if(usuarioPesquisado.isPresent()){
             return ResponseEntity.ok(usuarioPesquisado.get());
         } else {
-            return ResponseEntity.notFound().build();
+            throw new NotFoundException("Usuário não encontrado com ID: " + id);
         }
     }
 
@@ -90,6 +92,7 @@ public class UsuarioController {
      * @param id o ID do usuário a ser atualizado.
      * @param usuarioParaAtualizar os novos dados do usuário.
      * @return o usuário atualizado.
+     * @throws NotFoundException se o usuário com o ID especificado não for encontradp.
      */
     @Operation(summary = "Atualiza as informações do usuário por ID")
     @ApiResponses(value = {
@@ -105,7 +108,7 @@ public class UsuarioController {
             usuarioParaAtualizar.setIdUsuario(id);
             return ResponseEntity.ok(usuarioRepository.save(usuarioParaAtualizar));
         } else {
-            return ResponseEntity.notFound().build();
+            throw new NotFoundException("Usuário não encontrado com ID: " + id);
         }
     }
 
@@ -113,6 +116,7 @@ public class UsuarioController {
      * Exclui um usuário por ID.
      * @param id o ID do usuário a ser excluído.
      * @return uma resposta indicando o sucesso ou falha da operação.
+     * @throws NotFoundException se o usuário com o ID especificado não for encontradp.
      */
     @Operation(summary = "Remove o usuário por ID")
     @ApiResponses(value = {
@@ -128,7 +132,7 @@ public class UsuarioController {
             usuarioRepository.delete(usuarioPesquisado.get());
             return ResponseEntity.noContent().build();
         } else {
-            return ResponseEntity.notFound().build();
+            throw new NotFoundException("Usuário não encontrado com ID: " + id);
         }
     }
 }

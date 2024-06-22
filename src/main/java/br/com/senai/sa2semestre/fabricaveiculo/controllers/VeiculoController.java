@@ -1,6 +1,7 @@
 package br.com.senai.sa2semestre.fabricaveiculo.controllers;
 
 import br.com.senai.sa2semestre.fabricaveiculo.entities.Veiculo;
+import br.com.senai.sa2semestre.fabricaveiculo.exceptions.NotFoundException;
 import br.com.senai.sa2semestre.fabricaveiculo.repositories.VeiculoRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -53,8 +54,9 @@ public class VeiculoController {
      * Obtém um veículo por chassis (que representa o ID)
      * @param chassis é o chassis do veículo
      * @return o veículo com o chassis especificado.
+     * @throws NotFoundException se o veículo com o Chassis especificado não for encontradp.
      */
-    @Operation(summary = "Obtém o veículo por ID")
+    @Operation(summary = "Obtém o veículo por Chassis")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Veículo encontrado"),
             @ApiResponse(responseCode = "404", description = "Veículo não encontrado"),
@@ -67,7 +69,7 @@ public class VeiculoController {
         if(veiculoPesquisado.isPresent()){
             return ResponseEntity.ok(veiculoPesquisado.get());
         } else {
-            return ResponseEntity.notFound().build();
+            throw new NotFoundException("Veículo não encontrado com Chassis: " + chassis);
         }
     }
 
@@ -91,6 +93,7 @@ public class VeiculoController {
      * @param chassis o chassis do veículo a ser atualizado
      * @param veiculoParaAtualizar os novos dados do veículo
      * @return o veículo atualizado
+     * @throws NotFoundException se o veículo com o Chassis especificado não for encontradp.
      */
     @Operation(summary = "Atualiza as informações do veículo por ID")
     @ApiResponses(value = {
@@ -106,7 +109,7 @@ public class VeiculoController {
             veiculoParaAtualizar.setChassis(chassis);
             return ResponseEntity.ok(veiculoRepository.save(veiculoParaAtualizar));
         } else {
-            return ResponseEntity.notFound().build();
+            throw new NotFoundException("Veículo não encontrado com Chassis: " + chassis);
         }
     }
 
@@ -114,6 +117,7 @@ public class VeiculoController {
      * Exclui um veículo por chassis
      * @param chassis do veículo a ser excluído
      * @return uma resposta indicando sucesso ou falha da operação
+     * @throws NotFoundException se o veículo com o Chassis especificado não for encontradp.
      */
     @Operation(summary = "Remove o veículo por ID")
     @ApiResponses(value = {
@@ -129,7 +133,7 @@ public class VeiculoController {
             veiculoRepository.delete(veiculoPesquisado.get());
             return ResponseEntity.noContent().build();
         } else {
-            return ResponseEntity.notFound().build();
+            throw new NotFoundException("Veículo não encontrado com Chassis: " + chassis);
         }
     }
 }

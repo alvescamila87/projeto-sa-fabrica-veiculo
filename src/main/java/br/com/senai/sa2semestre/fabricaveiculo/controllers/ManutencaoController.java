@@ -1,6 +1,7 @@
 package br.com.senai.sa2semestre.fabricaveiculo.controllers;
 
 import br.com.senai.sa2semestre.fabricaveiculo.entities.Manutencao;
+import br.com.senai.sa2semestre.fabricaveiculo.exceptions.NotFoundException;
 import br.com.senai.sa2semestre.fabricaveiculo.repositories.ManutencaoRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -52,6 +53,7 @@ public class ManutencaoController {
      * Obtém uma manutenção por ID.
      * @param id o ID da manutenção.
      * @return a manutenção com o ID especificado.
+     * @throws NotFoundException se a manutenção com o ID especificado não for encontrada.
      */
     @Operation(summary = "Obtém uma manutenção por ID")
     @ApiResponses(value = {
@@ -66,7 +68,7 @@ public class ManutencaoController {
         if(manutencaoPesquisada.isPresent()){
             return ResponseEntity.ok(manutencaoPesquisada.get());
         } else {
-            return ResponseEntity.notFound().build();
+            throw new NotFoundException("Manutenção de equipamento não encontrada com ID: " + id);
         }
     }
 
@@ -90,6 +92,7 @@ public class ManutencaoController {
      * @param id o ID da manutenção a ser atualizada.
      * @param manutencaoParaAtualizar os novos dados da manutenção.
      * @return a manutenção atualizada.
+     * @throws NotFoundException se a manutenção com o ID especificado não for encontrada.
      */
     @Operation(summary = "Atualiza uma manutenção existente")
     @ApiResponses(value = {
@@ -105,7 +108,7 @@ public class ManutencaoController {
             manutencaoParaAtualizar.setIdManutencao(id);
             return ResponseEntity.ok(manutencaoRepository.save(manutencaoParaAtualizar));
         } else {
-            return ResponseEntity.notFound().build();
+            throw new NotFoundException("Manutenção de equipamento não encontrada com ID: " + id);
         }
     }
 
@@ -113,6 +116,7 @@ public class ManutencaoController {
      * Exclui uma manutenção por ID.
      * @param id o ID da manutenção a ser excluída.
      * @return uma resposta indicando o sucesso ou falha da operação.
+     * @throws NotFoundException se a manutenção com o ID especificado não for encontrada.
      */
     @Operation(summary = "Exclui uma manutenção por ID")
     @ApiResponses(value = {
@@ -128,7 +132,7 @@ public class ManutencaoController {
             manutencaoRepository.delete(manutencaoPesquisada.get());
             return ResponseEntity.noContent().build();
         } else {
-            return ResponseEntity.notFound().build();
+            throw new NotFoundException("Manutenção de equipamento não encontrada com ID: " + id);
         }
     }
 }

@@ -1,6 +1,7 @@
 package br.com.senai.sa2semestre.fabricaveiculo.controllers;
 
 import br.com.senai.sa2semestre.fabricaveiculo.entities.Producao;
+import br.com.senai.sa2semestre.fabricaveiculo.exceptions.NotFoundException;
 import br.com.senai.sa2semestre.fabricaveiculo.repositories.ProducaoRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -52,6 +53,7 @@ public class ProducaoController {
      * Obtém a produção de montagem por ID fornecido
      * @param id da produção a ser pesquisada
      * @return a produção encontrda de acordo com o ID fornecido
+     * @throws NotFoundException se a produção com o ID especificado não for encontrada.
      */
     @Operation(summary = "Obtém uma produção por ID")
     @ApiResponses(value = {
@@ -66,7 +68,7 @@ public class ProducaoController {
         if (producaoPesquisada.isPresent()) {
             return ResponseEntity.ok(producaoPesquisada.get());
         } else {
-            return ResponseEntity.notFound().build();
+            throw new NotFoundException("Produção da linha de montagem não encontrada com ID: " + id);
         }
     }
 
@@ -90,6 +92,7 @@ public class ProducaoController {
      * @param id de produção para atualizar dados
      * @param producaoParaAtualizar novos dados para atualizar produção da montagem
      * @return a produção com os dados atualizados
+     * @throws NotFoundException se a produção com o ID especificado não for encontrada.
      */
     @Operation(summary = "Atualiza uma produção existente")
     @ApiResponses(value = {
@@ -105,7 +108,7 @@ public class ProducaoController {
             producaoParaAtualizar.setIdProducao(id);
         return ResponseEntity.ok(producaoRepository.save(producaoParaAtualizar));
         } else {
-            return ResponseEntity.noContent().build();
+            throw new NotFoundException("Produção da linha de montagem não encontrada com ID: " + id);
         }
     }
 
@@ -113,6 +116,7 @@ public class ProducaoController {
      * Remove a produção de montagem por ID forneceido
      * @param id´da produco para remover
      * @return mensagem de falha ou sucesso da operação
+     * @throws NotFoundException se a produção com o ID especificado não for encontrada.
      */
     @Operation(summary = "Exclui uma produção por ID")
     @ApiResponses(value = {
@@ -128,7 +132,7 @@ public class ProducaoController {
             producaoRepository.delete(producaoPesquisada.get());
             return ResponseEntity.noContent().build();
         } else {
-            return ResponseEntity.notFound().build();
+            throw new NotFoundException("Produção da linha de montagem não encontrada com ID: " + id);
         }
     }
 }

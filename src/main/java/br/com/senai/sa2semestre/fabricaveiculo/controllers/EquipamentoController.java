@@ -1,6 +1,7 @@
 package br.com.senai.sa2semestre.fabricaveiculo.controllers;
 
 import br.com.senai.sa2semestre.fabricaveiculo.entities.Equipamento;
+import br.com.senai.sa2semestre.fabricaveiculo.exceptions.NotFoundException;
 import br.com.senai.sa2semestre.fabricaveiculo.repositories.EquipamentoRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -71,6 +72,7 @@ public class EquipamentoController {
      * Obtém um equipamento por ID.
      * @param id o ID do equipamento.
      * @return o equipamento com o ID especificado.
+     * @throws NotFoundException se o equipamento com o ID especificado não for encontrado.
      */
     @Operation(summary = "Obtém um equipamento por ID")
     @ApiResponses(value = {
@@ -89,7 +91,7 @@ public class EquipamentoController {
         if(equipamentoPesquisado.isPresent()){
             return ResponseEntity.ok(equipamentoPesquisado.get());
         } else {
-            return ResponseEntity.notFound().build();
+            throw new NotFoundException("Equipamento não encontrado com ID: " + id);
         }
     }
 
@@ -116,6 +118,7 @@ public class EquipamentoController {
      * @param id o ID do equipamento a ser atualizado.
      * @param equipamentoParaAtualizar os novos dados do equipamento.
      * @return o equipamento atualizado.
+     * @throws NotFoundException se o equipamento com o ID especificado não for encontrado.
      */
     @Operation(summary = "Atualiza um equipamento existente")
     @ApiResponses(value = {
@@ -134,8 +137,8 @@ public class EquipamentoController {
         if (equipamentoPesquisado.isPresent()) {
             equipamentoParaAtualizar.setIdEquipamento(id);
             return ResponseEntity.ok(equipamentoRepository.save(equipamentoParaAtualizar));
-        } else {
-            return ResponseEntity.notFound().build();
+        }  else {
+            throw new NotFoundException("Equipamento não encontrado com ID: " + id);
         }
     }
 
@@ -143,6 +146,7 @@ public class EquipamentoController {
      * Exclui um equipamento por ID.
      * @param id o ID do equipamento a ser excluído.
      * @return uma resposta indicando o sucesso ou falha da operação.
+     * @throws NotFoundException se o equipamento com o ID especificado não for encontrado.
      */
     @Operation(summary = "Exclui um equipamento por ID")
     @ApiResponses(value = {
@@ -160,8 +164,8 @@ public class EquipamentoController {
         if(equipamentoPesquisado.isPresent()){
             equipamentoRepository.delete(equipamentoPesquisado.get());
             return ResponseEntity.noContent().build();
-        } else {
-            return ResponseEntity.notFound().build();
+        }  else {
+            throw new NotFoundException("Equipamento não encontrado com ID: " + id);
         }
     }
 }

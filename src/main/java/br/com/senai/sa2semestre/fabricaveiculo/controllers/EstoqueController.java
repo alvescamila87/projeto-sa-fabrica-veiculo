@@ -1,6 +1,7 @@
 package br.com.senai.sa2semestre.fabricaveiculo.controllers;
 
 import br.com.senai.sa2semestre.fabricaveiculo.entities.Estoque;
+import br.com.senai.sa2semestre.fabricaveiculo.exceptions.NotFoundException;
 import br.com.senai.sa2semestre.fabricaveiculo.repositories.EstoqueRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -54,6 +55,7 @@ public class EstoqueController {
      * Obtém o estoque por ID especificado
      * @param id do estoque a ser pesquisado
      * @return o estoque de acordo com o ID fornecido
+     * @throws NotFoundException se o estoque com o ID especificado não for encontrado.
      */
     @Operation(summary = "Obtém o estoque por ID")
     @ApiResponses(value = {
@@ -67,8 +69,8 @@ public class EstoqueController {
 
         if(estoquePesquisado.isPresent()){
             return ResponseEntity.ok(estoquePesquisado.get());
-        } else {
-            return ResponseEntity.notFound().build();
+        }  else {
+            throw new NotFoundException("Estoque não encontrado com ID: " + id);
         }
     }
 
@@ -92,6 +94,7 @@ public class EstoqueController {
      * @param id do estoque a ser atualizado
      * @param estoqueParaAtualizar são os dados a serem atualizados do estoque
      * @return o estoque atualizado
+     * @throws NotFoundException se o estoque com o ID especificado não for encontrado.
      */
     @Operation(summary = "Atualiza as informações do estoque por ID")
     @ApiResponses(value = {
@@ -107,7 +110,7 @@ public class EstoqueController {
             estoqueParaAtualizar.setIdEstoque(id);
             return ResponseEntity.ok(estoqueRepository.save(estoqueParaAtualizar));
         } else {
-            return ResponseEntity.notFound().build();
+            throw new NotFoundException("Estoque não encontrado com ID: " + id);
         }
     }
 
@@ -115,6 +118,7 @@ public class EstoqueController {
      * Remove o estoque de acordo com o ID fornecido para deleção
      * @param id do estoque a ser removido
      * @return mensagem de falha ou sucesso da operação
+     * @throws NotFoundException se o estoque com o ID especificado não for encontrado.
      */
     @Operation(summary = "Remove o estoque por ID")
     @ApiResponses(value = {
@@ -130,7 +134,7 @@ public class EstoqueController {
             estoqueRepository.delete(estoquePesquisado.get());
             return ResponseEntity.noContent().build();
         } else {
-            return ResponseEntity.notFound().build();
+            throw new NotFoundException("Estoque não encontrado com ID: " + id);
         }
     }
 }

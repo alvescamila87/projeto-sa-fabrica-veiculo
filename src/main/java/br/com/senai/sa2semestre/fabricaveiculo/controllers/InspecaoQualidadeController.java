@@ -1,6 +1,7 @@
 package br.com.senai.sa2semestre.fabricaveiculo.controllers;
 
 import br.com.senai.sa2semestre.fabricaveiculo.entities.InspecaoQualidade;
+import br.com.senai.sa2semestre.fabricaveiculo.exceptions.NotFoundException;
 import br.com.senai.sa2semestre.fabricaveiculo.repositories.InspecaoQualidadeRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -52,6 +53,7 @@ public class InspecaoQualidadeController {
      * Obtém a inspeção de qualidade por ID fornecido
      * @param id a ser pesquisado
      * @return a inspeção de qualidade de acordo com o ID fornecedido
+     * @throws NotFoundException se a inspeção de qualidade com o ID especificado não for encontrada.
      */
     @Operation(summary = "Obtém a inspeção de qualidade por ID")
     @ApiResponses(value = {
@@ -66,7 +68,7 @@ public class InspecaoQualidadeController {
         if(inspecaoQualidadePesquisada.isPresent()){
             return ResponseEntity.ok(inspecaoQualidadePesquisada.get());
         } else {
-            return ResponseEntity.notFound().build();
+            throw new NotFoundException("Inspeção de qualidade não encontrada com ID: " + id);
         }
     }
 
@@ -90,6 +92,7 @@ public class InspecaoQualidadeController {
      * @param id da inspeção de qualidade a ser pesquisada
      * @param inspecaoQualidadeParaAtualizar novo dados de atualização da inspeção de qualidade
      * @return a inspeção de qualidade atualizada
+     * @throws NotFoundException se a inspeção de qualidade com o ID especificado não for encontrada.
      */
     @Operation(summary = "Atualiza os dados da inspeção de qualidade por ID")
     @ApiResponses(value = {
@@ -105,7 +108,7 @@ public class InspecaoQualidadeController {
             inspecaoQualidadeParaAtualizar.setIdInspecao(id);
             return ResponseEntity.ok(inspecaoQualidadeRepository.save(inspecaoQualidadeParaAtualizar));
         } else {
-            return ResponseEntity.notFound().build();
+            throw new NotFoundException("Inspeção de qualidade não encontrada com ID: " + id);
         }
     }
 
@@ -113,6 +116,7 @@ public class InspecaoQualidadeController {
      * Remove a inspeção de qualidade de acordo com o ID fornecido
      * @param id da inspeção de qualidade a ser pesquisada
      * @return mensagem falha ou sucesso da operação
+     * @throws NotFoundException se a inspeção de qualidade com o ID especificado não for encontrada.
      */
     @Operation(summary = "Remove a inspeção de qualidade por ID")
     @ApiResponses(value = {
@@ -128,7 +132,7 @@ public class InspecaoQualidadeController {
             inspecaoQualidadeRepository.delete(inspecaoQualidadePesquisada.get());
             return ResponseEntity.noContent().build();
         } else {
-            return ResponseEntity.notFound().build();
+            throw new NotFoundException("Inspeção de qualidade não encontrada com ID: " + id);
         }
     }
 }

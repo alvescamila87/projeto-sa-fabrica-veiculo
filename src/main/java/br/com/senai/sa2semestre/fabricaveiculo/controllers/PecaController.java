@@ -1,6 +1,7 @@
 package br.com.senai.sa2semestre.fabricaveiculo.controllers;
 
 import br.com.senai.sa2semestre.fabricaveiculo.entities.Peca;
+import br.com.senai.sa2semestre.fabricaveiculo.exceptions.NotFoundException;
 import br.com.senai.sa2semestre.fabricaveiculo.repositories.PecaRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -52,6 +53,7 @@ public class PecaController {
      * Obtém uma peça pelo ID
      * @param id da peça
      * @return a peça do ID fornecido
+     * @throws NotFoundException se a peça com o ID especificado não for encontrada.
      */
     @Operation(summary = "Obtém uma peça por ID")
     @ApiResponses(value = {
@@ -66,7 +68,7 @@ public class PecaController {
         if(pecaPesquisada.isPresent()){
             return ResponseEntity.ok(pecaPesquisada.get());
         } else {
-            return ResponseEntity.notFound().build();
+            throw new NotFoundException("Peça não encontrada com ID: " + id);
         }
     }
 
@@ -90,6 +92,7 @@ public class PecaController {
      * @param id da peça a ser atualizada
      * @param pecaParaAtualizar são os novos dados a serem atualizados na peça
      * @return a peça com os dados atualizados
+     * @throws NotFoundException se a peça com o ID especificado não for encontrada.
      */
     @Operation(summary = "Atualiza uma peça existente")
     @ApiResponses(value = {
@@ -105,7 +108,7 @@ public class PecaController {
             pecaParaAtualizar.setIdPeca(id);
             return ResponseEntity.ok(pecaRepository.save(pecaParaAtualizar));
         } else {
-            return ResponseEntity.notFound().build();
+            throw new NotFoundException("Peça não encontrada com ID: " + id);
         }
     }
 
@@ -113,6 +116,7 @@ public class PecaController {
      * Excluir peça por id fornecida
      * @param id da peça a ser excluída
      * @return uma resposta indicando o sucesso ou falha da operação.
+     * @throws NotFoundException se a peça com o ID especificado não for encontrada.
      */
     @Operation(summary = "Exclui uma peça por ID")
     @ApiResponses(value = {
@@ -128,7 +132,7 @@ public class PecaController {
             pecaRepository.delete(pecaPesquisada.get());
             return ResponseEntity.noContent().build();
         } else {
-            return ResponseEntity.notFound().build();
+            throw new NotFoundException("Peça não encontrada com ID: " + id);
         }
     }
 }
