@@ -1,4 +1,5 @@
 br.com.senai.sa2semestre.fabricaveiculo
 br.com.senai.sa2semestre.fabricaveiculo.controllers
 br.com.senai.sa2semestre.fabricaveiculo.entities
+br.com.senai.sa2semestre.fabricaveiculo.exceptions
 br.com.senai.sa2semestre.fabricaveiculo.repositories
