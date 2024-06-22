@@ -1,4 +1,4 @@
-# Projeto S.A: Fábrica de Veículos
+# Projeto S.A: Montadora de Veículos
 
 ## Sobre o projeto
 Uma aplicação Java/Spring desenvolvida pela startup "Tech Solutions" em parceria com alunos do SENAI para uma fábrica / montadora automotiva, otimizando processos de produção e integrando dados para facilitar a tomada de decisões na era da Indústria 4.0.
@@ -21,21 +21,7 @@ Uma aplicação Java/Spring desenvolvida pela startup "Tech Solutions" em parcer
   "chassis": "ABC123456789DEF01",
   "modelo": "Sedan",
   "anoFabricacao": 2023,
-  "cor": "Prata",
-  "listaDePecasUtilizadasNoVeiculo": [
-    {
-      "idPeca": 1,
-      "nome": "Motor",
-      "descricao": "Motor de combustão interna para veículos",
-      "quantidadePecas": 1
-    },
-    {
-      "idPeca": 2,
-      "nome": "Transmissão",
-      "descricao": "Caixa de câmbio automática",
-      "quantidadePecas": 1
-    }
-  ]
+  "cor": "Prata"  
 }
 ```
 
@@ -52,13 +38,13 @@ Uma aplicação Java/Spring desenvolvida pela startup "Tech Solutions" em parcer
 ## Tecnologias
 * Java (Maven)
 * Spring (Boot, JPA, Devtools)
-* Swagger (OpenAI Doc)
+* Swagger (OpenAPI Doc)
 * Banco de dados em memória (H2)
 * JavaDoc
 * Postman
 
 ## Swagger
-![image](https://github.com/alvescamila87/projeto-sa-fabrica-veiculo/assets/116912821/b12a3227-ff7c-4308-885f-ee150def9cf1)
+![image](https://github.com/alvescamila87/projeto-sa-fabrica-veiculo/assets/116912821/81101f57-cc0b-4490-953b-8e8376538a80)
 
 
 ## Autor
