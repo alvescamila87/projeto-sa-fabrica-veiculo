@@ -11,14 +11,14 @@
             <h1>API Montadora automotiva</h1>
         </header>
         <nav>
-            <a href="#" onclick="showSection('pecas')">Peças</a>
+            <a href="#" onclick="showSection('form-peca-add')">Peças</a>
             <a href="#" onclick="showSection('estoques')">Estoques</a>
             <a href="#" onclick="showSection('veiculos')">Veículos</a>
         </nav>
         <!-- Seção adicionar peça -->
-        <section id="form-group" class="section" style="display: block;">
+        <section id="form-peca-add"class="section-group" style="display: block;">
             <h2>Gerenciamento de Peças</h2>
-            <form id="form-peca-add">
+            <form>
                 <label for="nome">Nome da peça:</label>
                 <input type="text" id="nome" name="nome" required><br><br>
                 
@@ -34,9 +34,9 @@
         </section>
 
         <!-- Seção listar peças -->
-        <section id="form-group" class="section"></section>
+        <section id="form-peca-list" class="section-group"></section>
             <h3>Listagem de Peças</h3>
-            <table id="form-peca-list">
+            <table >
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -52,28 +52,10 @@
             </table>
         </section>
 
-        <!-- Seção atualizar peça por ID -->
-        <section id="form-group" class="section" style="display: none;">
-            <h3>Atualizar dados da peça por  peça por ID</h3>
-            <form id="form-peca-update-id">
-                <label for="novo-nome">Novo nome da peça:</label>
-                <input type="text" id="novo-nome" name="novo-nome" required><br><br>
-                
-                <label for="nova-descricao">Nova descrição de peça:</label>
-                <input type="text" id="nova-descricao" name="nova-descricao" required><br><br>
-                
-                <label for="nova-quantidade">Nova quantidade de peças:</label>
-                <input type="number" id="nova-quantidade" name="nova-quantidade" required><br><br>
-                
-                <button type="button" onclick="atualizarPeca()">Atualizar</button>
-                <button type="button" onclick="limparFormulario()">Limpar</button>
-            </form>
-        </section>
-
-        <!-- Seção pesquisar peça por ID -->
-        <section id="form-group" class="section" style="display: none;">
+         <!-- Seção pesquisar peça por ID -->
+         <section id="form-peca-search-id" class="section-group" style="display: none;">
             <h3>Pesquisar peça por ID</h3>
-            <form id="form-peca-search-id">
+            <form >
                 <label for="id_peca">ID da peça:</label>
                 <input type="text" id="id_peca" name="id_peca" required><br><br>
 
@@ -82,17 +64,25 @@
             </form>
         </section>
 
-
-        <!-- Seção excluir peça por ID -->
-        <section id="remove-group" class="section" style="display: none;">
-            <h3>Remover peça por ID</h3>
-            <form id="form-peca-delete-id">
-                <label for="id_peca">ID da peça:</label>
-                <input type="text" id="id_peca" name="id_peca" required><br><br>
-
-                <button type="button" onclick="deletarPeca()">Deletar</button>
-                <button type="button" onclick="limparFormulario()">Limpar</button>
-            </form>
+        <!-- Seção editar peça por ID -->
+        <section id="form-peca-modal" class="section-group-modal" style="display: none;">
+            <div class="modal-content">
+                <span class="close-button" onclick="fecharModal()">&times;</span>
+                <h3>Editar peça</h3>
+                <form>
+                    <label for="novo-nome">Novo nome da peça:</label>
+                    <input type="text" id="novo-nome" name="novo-nome" required><br><br>
+                    
+                    <label for="nova-descricao">Nova descrição de peça:</label>
+                    <input type="text" id="nova-descricao" name="nova-descricao" required><br><br>
+                    
+                    <label for="nova-quantidade">Nova quantidade de peças:</label>
+                    <input type="number" id="nova-quantidade" name="nova-quantidade" required><br><br>
+                    
+                    <button type="button" onclick="salvarEdicaoPeca()">Salvar</button>
+                    <button type="button" onclick="limparFormularioEdicaoModal()">Limpar</button>
+                </form>
+            </div>
         </section>
 
         <footer>
