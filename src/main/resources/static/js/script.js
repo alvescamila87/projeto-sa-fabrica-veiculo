@@ -23,6 +23,14 @@ function limparFormulario() {
 }
 
 /**
+ * Função para limpar os campos do formulário de pesquisa de peça
+ */
+function limparPesquisa() {
+    document.getElementById('id_peca').value = '';
+    listarPecas();
+}
+
+/**
  * Função para limpar os campos do formulário
  */
 function limparFormularioEdicaoModal() {
@@ -160,10 +168,15 @@ function abrirModalEdicaoPeca(idPeca) {
  * Função para salvar edição da peça
  */
 function salvarEdicaoPeca() {
-    const idPeca = document.querySelector('#form-peca-modal button[onclick="salvarEdicaoPeca()"]').getAttribute('data-id');
+    const idPeca = document.querySelector('#form-peca-modal button[onclick="salvarEdicaoPeca()"]').getAttribute('data-id');    
     const novo_nome = document.getElementById('novo-nome').value;
     const nova_descricao = document.getElementById('nova-descricao').value;
     const nova_quantidade = parseInt(document.getElementById('nova-quantidade').value);
+
+    if (!novo_nome.trim() || !nova_descricao.trim() || isNaN(nova_quantidade) || nova_quantidade <= 0) {
+        alert('Todos os campos são obrigatórios e devem conter valores válidos.');
+        return;
+    }
 
     const pecaAtualizada = {
         nome: novo_nome,
@@ -207,11 +220,52 @@ function excluirPeca(idPeca) {
             if (!response.ok) {
                 throw new Error('Erro ao excluir peça');
             }
-            listarPecas();
+            listarPecas(); // Atualiza a lista de peças após excluir
         })
         .catch(error => {
             console.error('Erro:', error);
             alert('Erro ao excluir peça');
         });
     } 
+}
+
+/**
+ * Função para peça por ID
+ */
+function pesquisarPeca() {
+    const idPeca = document.getElementById('id_peca').value;
+    
+    if (!idPeca || idPeca <= 0) {
+        alert("Favor inserir o ID da peça.");
+        return;
+    }
+
+    fetch(`${urlAPIPecas}/${idPeca}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Peça não encontrada');
+            }
+            return response.json();
+        })
+        .then(data => {
+            const resultadoPesquisaId = document.getElementById('form-peca-list-tuples');
+            resultadoPesquisaId.innerHTML = `            
+            <tr>
+                <td>${data.idPeca}</td>
+                <td>${data.nome}</td>
+                <td>${data.descricao}</td>
+                <td>${data.quantidadePecas}</td>
+                <td>
+                    <button onclick="abrirModalEdicaoPeca(${data.idPeca})">Editar</button>
+                    <button onclick="excluirPeca(${data.idPeca})">Excluir</button>                   
+                </td>
+            </tr>
+            `;
+        })
+        .catch(error => {
+            console.error('Erro:', error);
+            alert('Erro ao pesquisar peça');
+            const resultadoPesquisaId = document.getElementById('form-peca-list-tuples');
+            resultadoPesquisaId.innerHTML = ''; // Limpa o resultado anterior, se houver
+        });
 }

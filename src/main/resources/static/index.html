@@ -11,12 +11,15 @@
             <h1>API Montadora automotiva</h1>
         </header>
         <nav>
-            <a href="#" onclick="showSection('form-peca-add')">Peças</a>
-            <a href="#" onclick="showSection('estoques')">Estoques</a>
-            <a href="#" onclick="showSection('veiculos')">Veículos</a>
+            <a href="#" onclick="showSection('form-peca-list'); listarPecas();">Listar peças</a>
+            <a href="#" onclick="showSection('form-peca-add')">Adicionar peça</a>
+            <a href="#" onclick="showSection('estoques')">Listar estoques</a>
+            <a href="#" onclick="showSection('estoques')">Adicionar estoque</a>
+            <a href="#" onclick="showSection('veiculos')">Listar veículos</a>
+            <a href="#" onclick="showSection('veiculos')">Adicionar veículo</a>
         </nav>
         <!-- Seção adicionar peça -->
-        <section id="form-peca-add"class="section-group" style="display: block;">
+        <section id="form-peca-add" class="section-group" style="display: block;">
             <h2>Gerenciamento de Peças</h2>
             <form>
                 <label for="nome">Nome da peça:</label>
@@ -34,7 +37,14 @@
         </section>
 
         <!-- Seção listar peças -->
-        <section id="form-peca-list" class="section-group"></section>
+        <section id="form-peca-list" class="section-group" style="display: none;">
+             <!-- Seção pesquisar peça por ID -->
+            <h3>Pesquisar peça por ID</h3>
+            <form >
+                <input type="text" id="id_peca" name="id_peca" placeholder="Digite o ID da peça"><br><br>
+                <button type="button" onclick="pesquisarPeca()">Pesquisar</button>
+                <button type="button" onclick="limparPesquisa()">Limpar pesquisa</button>
+            </form>
             <h3>Listagem de Peças</h3>
             <table >
                 <thead>
@@ -50,19 +60,7 @@
                     <!-- Peças serão listados aqui -->
                 </tbody>
             </table>
-        </section>
-
-         <!-- Seção pesquisar peça por ID -->
-         <section id="form-peca-search-id" class="section-group" style="display: none;">
-            <h3>Pesquisar peça por ID</h3>
-            <form >
-                <label for="id_peca">ID da peça:</label>
-                <input type="text" id="id_peca" name="id_peca" required><br><br>
-
-                <button type="button" onclick="pesquisarPeca()">Pesquisar</button>
-                <button type="button" onclick="limparFormulario()">Limpar</button>
-            </form>
-        </section>
+        </section>      
 
         <!-- Seção editar peça por ID -->
         <section id="form-peca-modal" class="section-group-modal" style="display: none;">
