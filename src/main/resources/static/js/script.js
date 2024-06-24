@@ -648,7 +648,7 @@ function adicionarVeiculo() {
             alert("Veículo adicionado com sucesso!");
             console.log(data); // opcional: exibe o novo veiculo adicionada
             limparFormularioVeiculo();
-            listarVeiculo(); // Atualiza a lista de veículos após adicionar
+            listarVeiculos(); // Atualiza a lista de veículos após adicionar
         })
         .catch(error => {
             console.error('Erro:', error);

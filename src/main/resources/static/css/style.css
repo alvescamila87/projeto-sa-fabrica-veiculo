@@ -186,8 +186,10 @@ footer p {
     background: #da190b;
 }
 
-/* Estilos para as seções: de pesquisa por ID e adicionar peça, estoque */
-#form-veiculo-add, #form-veiculo-list form, #form-estoque-add, #form-estoque-list form, #form-peca-add, #form-peca-list form {
+/* Estilos para as seções: de pesquisa por ID e adicionar peça, estoque, veículo */
+#form-veiculo-add, #form-veiculo-list form, 
+#form-estoque-add, #form-estoque-list form, 
+#form-peca-add, #form-peca-list form {
     border: 1px solid #ccc;
     padding: 10px;
     margin-top: 15px;
