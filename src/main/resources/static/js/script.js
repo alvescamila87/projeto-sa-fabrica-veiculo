@@ -1,4 +1,5 @@
 const urlAPIPecas = 'http://localhost:8080/pecas';
+const urlAPIEstoques = 'http://localhost:8080/estoques';
 
 
 /**
@@ -12,6 +13,7 @@ function showSection(sectionId) {
     document.getElementById(sectionId).style.display = 'block';
 }
 
+/** PEÇAS  */
 
 /**
  * Função para limpar os campos do formulário
@@ -86,8 +88,8 @@ function listarPecas() {
                 <td>${peca.descricao}</td>
                 <td>${peca.quantidadePecas}</td>
                 <td>
-                    <button onclick="abrirModalEdicaoPeca(${peca.idPeca})">Editar</button>
-                    <button onclick="excluirPeca(${peca.idPeca})">Excluir</button>
+                    <button class="btn-editar" onclick="abrirModalEdicaoPeca(${peca.idPeca})">Editar</button>
+                    <button class="btn-excluir" onclick="excluirPeca(${peca.idPeca})">Excluir</button>
                 </td>
             `;
                 listaPecas.appendChild(row);
@@ -267,5 +269,120 @@ function pesquisarPeca() {
             alert('Erro ao pesquisar peça');
             const resultadoPesquisaId = document.getElementById('form-peca-list-tuples');
             resultadoPesquisaId.innerHTML = ''; // Limpa o resultado anterior, se houver
+        });
+}
+
+/** ESTOQUE */
+
+/**
+ * Função para limpar os campos do formulário estoque
+ */
+function limparFormularioEstoque() {
+    document.getElementById('id_peca_estoque').value = '';
+    document.getElementById('quantidade_estoque').value = '';
+}
+
+
+/**
+ * Função para limpar os campos do formulário de pesquisa de estoque
+ */
+function limparPesquisaEstoque() {
+    document.getElementById('id_estoque').value = '';
+    listarPecas();
+}
+
+/**
+ * Função para limpar os campos do formulário estoque
+ */
+function limparFormularioEdicaoModalEstoque() {
+    document.getElementById('novo-id_peca').value = '';
+    document.getElementById('nova-quantidade-estoque').value = '';
+}
+
+/**
+ * Carregar a lista de peças ao carregar a página
+ */
+document.addEventListener('DOMContentLoaded', listarEstoques);
+
+/**
+ * Função para criar estoque 
+ */
+function adicionarEstoque() {
+    const idPeca = document.getElementById('id_peca_estoque').value;
+    const quantidadeDisponivel = parseInt(document.getElementById('quantidade_estoque').value);
+
+    const novoEstoque = {
+        peca: idPeca,
+        quantidadeDisponivel: quantidadeDisponivel
+    };
+
+    fetch(`${urlAPIEstoques}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(novoEstoque)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erro ao adicionar estoque');
+            }
+            return response.json();
+        })
+        .then(data => {
+            alert("Estoque adicionado com sucesso!");
+            console.log(data); // opcional: exibe o novo estoque adicionado
+            limparFormulario();
+            listarEstoques(); // Atualiza a lista de estoque após adicionar
+        })
+        .catch(error => {
+            console.error('Erro:', error);
+            alert('Erro ao adicionar estoque');
+        });
+}
+
+/**
+* Função para listar todas as peças cadastradas.
+*/
+function listarEstoques() {
+    fetch(`${urlAPIEstoques}`)
+        .then(response => {
+            if (!response.ok) {
+                if (response.status === 404) {
+                    // Se o status for 404, significa que não há peças
+                    return [];
+                } else {
+                    throw new Error('Erro ao listar estoques');
+                }
+            }
+            return response.json();
+        })
+        .then(data => {
+            const listaEstoques = document.getElementById('form-estoque-list-tuples');
+            listaEstoques.innerHTML = '';
+
+            if (data.length === 0) {
+                listaEstoques.innerHTML = '<tr><td colspan="7">Nenhum estoque cadastrado.</td></tr>';
+                return;
+            }
+
+            // deve corresponder ao formato de atributos do backend (java)
+            data.forEach(estoque => {                
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                <td>${estoque.idEstoque}</td>
+                <td>${estoque.quantidadeDisponivel}</td>
+                <td>${estoque.idPeca}</td>
+                <td>
+                    <button class="btn-editar" onclick="abrirModalEdicaoPeca(${estoque.idEstoque})">Editar</button>
+                    <button class="btn-excluir" onclick="excluirPeca(${estoque.idEstoque})">Excluir</button>
+                </td>
+            `;
+            listaEstoques.appendChild(row);
+            });
+        })
+        .catch(error => {
+            console.error('Erro:', error);
+            alert('Erro ao listar estoques');
         });
 }

@@ -13,22 +13,22 @@
         <nav>
             <a href="#" onclick="showSection('form-peca-list'); listarPecas();">Listar peças</a>
             <a href="#" onclick="showSection('form-peca-add')">Adicionar peça</a>
-            <a href="#" onclick="showSection('estoques')">Listar estoques</a>
-            <a href="#" onclick="showSection('estoques')">Adicionar estoque</a>
+            <a href="#" onclick="showSection('form-estoque-list')">Listar estoques</a>
+            <a href="#" onclick="showSection('form-estoque-add')">Adicionar estoque</a>
             <a href="#" onclick="showSection('veiculos')">Listar veículos</a>
             <a href="#" onclick="showSection('veiculos')">Adicionar veículo</a>
         </nav>
         <!-- Seção adicionar peça -->
         <section id="form-peca-add" class="section-group" style="display: block;">
-            <h2>Gerenciamento de Peças</h2>
+            <h3>Cadastrar peça</h3>
             <form>
-                <label for="nome">Nome da peça:</label>
+                <label for="nome">Nome da peça</label>
                 <input type="text" id="nome" name="nome" required><br><br>
                 
-                <label for="descricao">Descrição de peça:</label>
+                <label for="descricao">Descrição de peça</label>
                 <input type="text" id="descricao" name="descricao" required><br><br>
                 
-                <label for="quantidade">Quantidade de peças:</label>
+                <label for="quantidade">Quantidade de peças</label>
                 <input type="number" id="quantidade" name="quantidade" required><br><br>
                 
                 <button type="button" onclick="adicionarPeca()">Salvar</button>
@@ -37,7 +37,7 @@
         </section>
 
         <!-- Seção listar peças -->
-        <section id="form-peca-list" class="section-group" style="display: none;">
+        <section id="form-peca-list"  class="section-group" style="display: none;">
              <!-- Seção pesquisar peça por ID -->
             <h3>Pesquisar peça por ID</h3>
             <form >
@@ -82,6 +82,46 @@
                 </form>
             </div>
         </section>
+
+        <!-- Seção adicionar estoque -->
+        <section id="form-estoque-add" class="section-group" style="display: block;">
+            <h3>Cadastrar estoque</h3>
+            <form>
+                <label for="id_peca_estoque">ID Peca</label>
+                <input type="text" id="id_peca_estoque" name="id_peca_estoque"><br><br>
+                
+                <label for="quantidade_estoque">Quantidade disponível</label>
+                <input type="number" id="quantidade_estoque" name="quantidade_estoque" required><br><br>
+                
+                <button type="button" onclick="adicionarEstoque()">Salvar</button>
+                <button type="button" onclick="limparFormularioEstoque()">Limpar</button>
+            </form>
+        </section>
+
+         <!-- Seção listar estoques -->
+         <section id="form-estoque-list"  class="section-group" style="display: none;">
+            <!-- Seção pesquisar estoque por ID -->
+           <h3>Pesquisar estoque por ID</h3>
+           <form >
+               <input type="text" id="id_estoque" name="id_estoque" placeholder="Digite o ID do estoque"><br><br>
+               <button type="button" onclick="pesquisarEstoque()">Pesquisar</button>
+               <button type="button" onclick="limparPesquisaEstoque()">Limpar pesquisa</button>
+           </form>
+           <h3>Listagem de Estoques</h3>
+           <table >
+               <thead>
+                   <tr>
+                       <th>ID</th>
+                       <th>ID Peça</th>
+                       <th>Quantidade disponível</th>
+                       <th>Ações</th>
+                   </tr>
+               </thead>
+               <tbody id="form-estoque-list-tuples">
+                   <!-- Peças serão listados aqui -->
+               </tbody>
+           </table>
+       </section>      
 
         <footer>
             <p>Designed by Camila Alves - 2024 &copy; Todos os direitos reservados.</p>
