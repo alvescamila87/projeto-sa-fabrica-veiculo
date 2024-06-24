@@ -1,5 +1,6 @@
 const urlAPIPecas = 'http://localhost:8080/pecas';
 const urlAPIEstoques = 'http://localhost:8080/estoques';
+const urlAPIVeiculos = 'http://localhost:8080/veiculos';
 
 
 /**
@@ -13,7 +14,9 @@ function showSection(sectionId) {
     document.getElementById(sectionId).style.display = 'block';
 }
 
-/** PEÇAS  */
+/*************************************************/
+/******************* PEÇAS ***********************/
+/*************************************************/
 
 /**
  * Função para limpar os campos do formulário
@@ -232,7 +235,7 @@ function excluirPeca(idPeca) {
 }
 
 /**
- * Função para peça por ID
+ * Função para pesquisar peça por ID
  */
 function pesquisarPeca() {
     const idPeca = document.getElementById('id_peca').value;
@@ -272,7 +275,9 @@ function pesquisarPeca() {
         });
 }
 
-/** ESTOQUE */
+/*************************************************/
+/**************** ESTOQUE ***********************/
+/*************************************************/
 
 /**
  * Função para limpar os campos do formulário estoque
@@ -308,14 +313,14 @@ document.addEventListener('DOMContentLoaded', listarEstoques);
  * Função para criar estoque 
  */
 function adicionarEstoque() {
-    const idPeca = document.getElementById('id_peca_estoque').value;
+    const idPeca = parseInt(document.getElementById('id_peca_estoque').value)
     const quantidadeDisponivel = parseInt(document.getElementById('quantidade_estoque').value);
 
     const novoEstoque = {
-        peca: idPeca,
+        peca: { idPeca: idPeca },
         quantidadeDisponivel: quantidadeDisponivel
     };
-
+    
     fetch(`${urlAPIEstoques}`, {
         method: 'POST',
         headers: {
@@ -342,7 +347,7 @@ function adicionarEstoque() {
 }
 
 /**
-* Função para listar todas as peças cadastradas.
+* Função para listar todos os estoques cadastrados.
 */
 function listarEstoques() {
     fetch(`${urlAPIEstoques}`)
@@ -372,10 +377,9 @@ function listarEstoques() {
                 row.innerHTML = `
                 <td>${estoque.idEstoque}</td>
                 <td>${estoque.quantidadeDisponivel}</td>
-                <td>${estoque.idPeca}</td>
                 <td>
-                    <button class="btn-editar" onclick="abrirModalEdicaoPeca(${estoque.idEstoque})">Editar</button>
-                    <button class="btn-excluir" onclick="excluirPeca(${estoque.idEstoque})">Excluir</button>
+                    <button class="btn-editar" onclick="abrirModalEdicaoEstoque(${estoque.idEstoque})">Editar</button>
+                    <button class="btn-excluir" onclick="excluirEstoque(${estoque.idEstoque})">Excluir</button>
                 </td>
             `;
             listaEstoques.appendChild(row);
@@ -384,5 +388,270 @@ function listarEstoques() {
         .catch(error => {
             console.error('Erro:', error);
             alert('Erro ao listar estoques');
+        });
+}
+
+/**
+ * Função para abrir o modal de edição e carregar os dados do estoque 
+ */
+function abrirModalEdicaoEstoque(idEstoque) {
+    fetch(`${urlAPIEstoques}/${idEstoque}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erro ao obter dados do estoque');
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (!data) {
+                throw new Error('Dados do estoque não encontrados');
+            }
+            document.getElementById('novo_id_peca_estoque').value = data.peca ? data.peca.idPeca : '';
+            document.getElementById('nova-quantidade_estoque').value = data.quantidadeDisponivel;
+            document.getElementById('form-estoque-modal').style.display = 'block';
+
+            const salvarBtn = document.querySelector('#form-estoque-modal button[onclick="salvarEdicaoEstoque()"]');
+            salvarBtn.setAttribute('data-id', idEstoque);  // Salva o ID da estoque no botão de salvar
+        })
+        .catch(error => {
+            console.log(data)
+            console.error('Erro:', error);
+            console.log(data)
+            alert('Erro ao obter dados da estoque');
+        });
+}
+
+/**
+ * Função para salvar edição do estoque
+ */
+function salvarEdicaoEstoque() {
+    const idEstoque = document.querySelector('#form-estoque-modal button[onclick="salvarEdicaoEstoque()"]').getAttribute('data-id');    
+    const novo_id_peca_estoque = parseInt(document.getElementById('novo-id_peca_estoque').value);
+    const nova_quantidade_estoque=  parseInt(document.getElementById('nova-quantidade_estoque').value);
+
+    if (isNaN(novo_id_peca_estoque) || novo_id_peca_estoque <= 0 || isNaN(nova_quantidade_estoque) || nova_quantidade_estoque <= 0) {
+        alert('Todos os campos são obrigatórios e devem conter valores válidos.');
+        return;
+    }
+
+    const estoqueAtualizado = {
+        peca: { idPeca: novo_id_peca_estoque },
+        quantidadeDisponivel: nova_quantidade_estoque
+    };    
+
+    fetch(`${urlAPIEstoques}/${idEstoque}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(estoqueAtualizado)
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Erro ao atualizar estoque');
+        }
+        return response.json();
+    })
+    .then(data => {
+        alert("Estoque atualizado com sucesso!");
+        fecharModalEstoque();
+        listarEstoques();
+    })
+    .catch(error => {
+        console.error('Erro:', error);
+        alert('Erro ao atualizar estoque');
+    });
+}
+
+/**
+ * Função para excluir estoque 
+ */
+function excluirEstoque(idEstoque) {
+    if (confirm("Confirma a exclusão deste estoque?")) {
+        fetch(`${urlAPIEstoques}/${idEstoque}`, {
+            method: 'DELETE'
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erro ao excluir estoque');
+            }
+            listarEstoques(); // Atualiza a lista de estoques após excluir
+        })
+        .catch(error => {
+            console.error('Erro:', error);
+            alert('Erro ao excluir estoque');
+        });
+    } 
+}
+
+/**
+ * Função para pesquisar peça por ID
+ */
+function pesquisarEstoque() {
+    const idEstoque = document.getElementById('id_estoque').value;
+    
+    if (!idEstoque || idEstoque <= 0) {
+        alert("Favor inserir o ID do estoque.");
+        return;
+    }
+
+    fetch(`${urlAPIEstoques}/${idEstoque}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Estoque não encontrado');
+            }
+            return response.json();
+        })
+        .then(data => {
+            const resultadoPesquisaId = document.getElementById('form-estoque-list-tuples');
+            resultadoPesquisaId.innerHTML = `            
+            <tr>
+                <td>${data.idEstoque}</td>
+                <td>${data.quantidadeDisponivel}</td>
+                <td>
+                    <button onclick="abrirModalEdicaoEstoque(${data.idEstoque})">Editar</button>
+                    <button onclick="excluirEstoque(${data.idEstoque})">Excluir</button>                   
+                </td>
+            </tr>
+            `;
+        })
+        .catch(error => {
+            console.error('Erro:', error);
+            alert('Erro ao pesquisar estoque');
+            const resultadoPesquisaId = document.getElementById('form-estoque-list-tuples');
+            resultadoPesquisaId.innerHTML = ''; // Limpa o resultado anterior, se houver
+        });
+}
+
+/****************************************************/
+/******************* VEÍCULOS ***********************/
+/****************************************************/
+
+/**
+ * Função para limpar os campos do formulário
+ */
+function limparFormularioVeiculo() {
+    document.getElementById('chassis').value = '';
+    document.getElementById('modelo').value = '';
+    document.getElementById('ano_fabricacao').value = '';
+    document.getElementById('cor').value = '';
+}
+
+/**
+ * Função para limpar os campos do formulário de pesquisa de veículo
+ */
+function limparPesquisaVeiculo() {
+    document.getElementById('chassis').value = '';
+    listarVeiculos();
+}
+
+/**
+ * Função para limpar os campos do formulário
+ */
+function limparFormularioEdicaoModalVeiculo() {
+    document.getElementById('novo_chassis').value = '';
+    document.getElementById('novo_modelo').value = '';
+    document.getElementById('novo_ano_fabricacao').value = '';
+    document.getElementById('nova_cor').value = '';
+}
+
+/**
+ * Carregar a lista de veículos ao carregar a página
+ */
+document.addEventListener('DOMContentLoaded', listarVeiculos);
+
+/**
+ * Função para fechar a modal de edição
+ */
+function fecharModalVeiculo() {
+    document.getElementById("form-veiculo-modal").style.display = 'none';
+}
+
+
+/**
+* Função para listar todos os veículos cadastrados.
+*/
+function listarVeiculos() {
+    fetch(`${urlAPIVeiculos}`)
+        .then(response => {
+            if (!response.ok) {
+                if (response.status === 404) {
+                    // Se o status for 404, significa que não há peças
+                    return [];
+                } else {
+                    throw new Error('Erro ao listar veiculos');
+                }
+            }
+            return response.json();
+        })
+        .then(data => {
+            const listaVeiculos = document.getElementById('form-veiculo-list-tuples');
+            listaVeiculos.innerHTML = '';
+
+            if (data.length === 0) {
+                listaVeiculos.innerHTML = '<tr><td colspan="7">Nenhum veículo cadastrado.</td></tr>';
+                return;
+            }
+
+            // deve corresponder ao formato de atributos do backend (java)
+            data.forEach(veiculo => {                
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                <td>${veiculo.chassis}</td>
+                <td>${veiculo.modelo}</td>
+                <td>${veiculo.anoFabricacao}</td>
+                <td>${veiculo.cor}</td>
+                <td>
+                    <button class="btn-editar" onclick="abrirModalEdicaoVeiculo(${veiculo.chassis})">Editar</button>
+                    <button class="btn-excluir" onclick="excluirVeiculo(${veiculo.chassis})">Excluir</button>
+                </td>
+            `;
+                listaVeiculos.appendChild(row);
+            });
+        })
+        .catch(error => {
+            console.error('Erro:', error);
+            alert('Erro ao listar veiculos');
+        });
+}
+
+/**
+ * Função para criar veiculo 
+ */
+function adicionarVeiculo() {
+    const chassis = document.getElementById('chassis').value;
+    const modelo = document.getElementById('modelo').value;
+    const ano_fabricacao = parseInt(document.getElementById('ano_fabricacao').value);
+    const cor = document.getElementById('cor').value;    
+    
+    const novoVeiculo = {
+        chassis: chassis,
+        modelo: modelo,
+        anoFabricacao: ano_fabricacao,
+        cor: cor
+    };
+
+    fetch(`${urlAPIVeiculos}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(novoVeiculo)
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erro ao adicionar veículo');
+            }
+            return response.json();
+        })
+        .then(data => {
+            alert("Veículo adicionado com sucesso!");
+            console.log(data); // opcional: exibe o novo veiculo adicionada
+            limparFormularioVeiculo();
+            listarVeiculo(); // Atualiza a lista de veículos após adicionar
+        })
+        .catch(error => {
+            console.error('Erro:', error);
+            alert('Erro ao adicionar veículo');
         });
 }

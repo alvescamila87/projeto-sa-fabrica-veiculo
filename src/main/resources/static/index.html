@@ -13,11 +13,12 @@
         <nav>
             <a href="#" onclick="showSection('form-peca-list'); listarPecas();">Listar peças</a>
             <a href="#" onclick="showSection('form-peca-add')">Adicionar peça</a>
-            <a href="#" onclick="showSection('form-estoque-list')">Listar estoques</a>
+            <a href="#" onclick="showSection('form-estoque-list'); listarEstoques()">Listar estoques</a>
             <a href="#" onclick="showSection('form-estoque-add')">Adicionar estoque</a>
-            <a href="#" onclick="showSection('veiculos')">Listar veículos</a>
-            <a href="#" onclick="showSection('veiculos')">Adicionar veículo</a>
+            <a href="#" onclick="showSection('form-veiculo-list')">Listar veículos</a>
+            <a href="#" onclick="showSection('form-veículo-list'); listarVeiculos()">Adicionar veículo</a>
         </nav>
+
         <!-- Seção adicionar peça -->
         <section id="form-peca-add" class="section-group" style="display: block;">
             <h3>Cadastrar peça</h3>
@@ -88,7 +89,7 @@
             <h3>Cadastrar estoque</h3>
             <form>
                 <label for="id_peca_estoque">ID Peca</label>
-                <input type="text" id="id_peca_estoque" name="id_peca_estoque"><br><br>
+                <input type="number" id="id_peca_estoque" name="id_peca_estoque" required><br><br> 
                 
                 <label for="quantidade_estoque">Quantidade disponível</label>
                 <input type="number" id="quantidade_estoque" name="quantidade_estoque" required><br><br>
@@ -112,16 +113,81 @@
                <thead>
                    <tr>
                        <th>ID</th>
-                       <th>ID Peça</th>
-                       <th>Quantidade disponível</th>
+                       <th>Quantidade de peças disponível em estoque</th>
                        <th>Ações</th>
                    </tr>
                </thead>
                <tbody id="form-estoque-list-tuples">
-                   <!-- Peças serão listados aqui -->
+                   <!-- Estoques serão listados aqui -->
                </tbody>
            </table>
-       </section>      
+       </section>   
+       
+        <!-- Seção editar estoque por ID -->
+        <section id="form-estoque-modal" class="section-group-modal" style="display: none;">
+            <div class="modal-content">
+                <span class="close-button" onclick="fecharModalEstoque()">&times;</span>
+                <h3>Editar estoque</h3>
+                <form>
+                    <label for="novo_id_peca_estoque">Novo ID Peca</label>
+                     <input type="number" id="novo_id_peca_estoque" name="novo_id_peca_estoque" required><br><br> 
+                
+                    <label for="nova_quantidade_estoque">Nova quantidade disponível</label>
+                    <input type="number" id="nova_quantidade_estoque" name="nova_quantidade_estoque" required><br><br>    
+                    
+                    <button type="button" onclick="salvarEdicaoEstoque()">Salvar</button>
+                    <button type="button" onclick="limparFormularioEdicaoModalEstoque()">Limpar</button>
+                </form>
+            </div>
+        </section>
+
+         <!-- Seção adicionar veiculo -->
+         <section id="form-veiculo-add" class="section-group" style="display: block;">
+            <h3>Cadastrar veículo</h3>
+            <form>
+                <label for="chassis">Chassis</label>
+                <input type="text" id="chassis" name="chassis" required><br><br>
+                
+                <label for="modelo">Modelo</label>
+                <input type="text" id="modelo" name="modelo" required><br><br>
+                
+                <label for="ano_fabricacao">Ano fabricação</label>
+                <input type="number" id="ano_fabricacao" name="ano_fabricacao" required><br><br>
+
+                <label for="cor">Cor</label>
+                <input type="text" id="cor" name="cor" required><br><br>
+                
+                <button type="button" onclick="adicionarVeiculo()">Salvar</button>
+                <button type="button" onclick="limparFormularioVeiculo()">Limpar</button>
+            </form>
+        </section>
+
+         <!-- Seção listar veículos -->
+         <section id="form-veiculo-list"  class="section-group" style="display: none;">
+            <!-- Seção pesquisar veículo por CHASSIS -->
+           <h3>Pesquisar veículo por CHASSIS</h3>
+           <form >
+               <input type="text" id="chassis_veiculo" name="chassis_veiculo" placeholder="Digite o CHASSIS do veículo"><br><br>
+               <button type="button" onclick="pesquisarVeiculo()">Pesquisar</button>
+               <button type="button" onclick="limparPesquisaVeiculo()">Limpar pesquisa</button>
+           </form>
+           <h3>Listagem de Veículos</h3>
+           <table >
+               <thead>
+                   <tr>
+                       <th>CHASSIS</th>
+                       <th>Modelo</th>
+                       <th>Ano fabricação</th>
+                       <th>Cor</th>
+                       <th>Ações</th>
+                   </tr>
+               </thead>
+               <tbody id="form-veiculo-list-tuples">
+                   <!-- Veículos serão listados aqui -->
+               </tbody>
+           </table>
+       </section>   
+
 
         <footer>
             <p>Designed by Camila Alves - 2024 &copy; Todos os direitos reservados.</p>
