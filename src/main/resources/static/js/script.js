@@ -1,18 +1,36 @@
+
+/*************************************************/
+/******************* GERAIS ***********************/
+/*************************************************/
+
 const urlAPIPecas = 'http://localhost:8080/pecas';
 const urlAPIEstoques = 'http://localhost:8080/estoques';
 const urlAPIVeiculos = 'http://localhost:8080/veiculos';
-
 
 /**
  * Função que permite motrar e ocultar seção especificada do HTML.
  * @param {string} sectionId - O ID da seção a ser exibida.
  */
 function showSection(sectionId) {
+    // Esconde todas as seções
     document.querySelectorAll('.section-group').forEach(section => {
         section.style.display = 'none';
     });
+    
+    // Mostra a seção específica passada como parâmetro
+    const sectionToShow = document.getElementById(sectionId);
+    if (sectionToShow) {
+        sectionToShow.style.display = 'block';
+    }
     document.getElementById(sectionId).style.display = 'block';
 }
+
+// No final do script.js, você pode adicionar:
+document.addEventListener('DOMContentLoaded', function() {
+    showSection('form-peca-list'); // Exibe a seção de listar peças por padrão ao carregar a página
+    listarPecas(); // Lista as peças ao carregar a seção
+});
+
 
 /*************************************************/
 /******************* PEÇAS ***********************/
@@ -111,6 +129,11 @@ function adicionarPeca() {
     const nome = document.getElementById('nome').value;
     const descricao = document.getElementById('descricao').value;
     const quantidade = parseInt(document.getElementById('quantidade').value);
+
+    if (!nome.trim() || !descricao.trim() || isNaN(quantidade) || quantidade <= 0) {
+        alert("Todos os campos são obrigatórios e devem conter valores válidos.");
+        return;
+    }
     
     const novaPeca = {
         nome: nome,
@@ -322,6 +345,11 @@ function fecharModalEstoque() {
 function adicionarEstoque() {
     const idPeca = parseInt(document.getElementById('id_peca_estoque').value)
     const quantidadeDisponivel = parseInt(document.getElementById('quantidade_estoque').value);
+
+    if (!idPeca || idPeca <= 0 || isNaN(quantidadeDisponivel) || quantidadeDisponivel <= 0) {
+        alert("Todos os campos são obrigatórios e devem conter valores válidos.");
+        return;
+    }
 
     const novoEstoque = {
         peca: { idPeca: idPeca },
@@ -559,7 +587,6 @@ function limparPesquisaVeiculo() {
  * Função para limpar os campos do formulário
  */
 function limparFormularioEdicaoModalVeiculo() {
-    document.getElementById('novo_chassis').value = '';
     document.getElementById('novo_modelo').value = '';
     document.getElementById('novo_ano_fabricacao').value = '';
     document.getElementById('nova_cor').value = '';
@@ -633,6 +660,11 @@ function adicionarVeiculo() {
     const modelo = document.getElementById('modelo').value;
     const ano_fabricacao = parseInt(document.getElementById('ano_fabricacao').value);
     const cor = document.getElementById('cor').value;    
+
+    if (!chassis.trim() || !modelo.trim() || isNaN(ano_fabricacao) || ano_fabricacao <= 0 || !cor.trim()) {
+        alert('Todos os campos são obrigatórios e devem conter valores válidos.');
+        return;
+    }  
     
     const novoVeiculo = {
         chassis: chassis,
@@ -787,8 +819,8 @@ function pesquisarVeiculo() {
                 <td>${data.anoFabricacao}</td>
                 <td>${data.cor}</td>
                 <td>
-                    <button class="btn-editar" onclick="abrirModalEdicaoVeiculo(${data.chassis})">Editar</button>
-                    <button class="btn-excluir" onclick="excluirVeiculo(${data.chassis})">Excluir</button>                   
+                    <button class="btn-editar" onclick="abrirModalEdicaoVeiculo('${data.chassis}')">Editar</button>
+                    <button class="btn-excluir" onclick="excluirVeiculo('${data.chassis}')">Excluir</button>                   
                 </td>
             </tr>
             `;
