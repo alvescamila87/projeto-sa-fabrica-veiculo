@@ -151,7 +151,7 @@
                 <label for="modelo">Modelo</label>
                 <input type="text" id="modelo" name="modelo" required><br><br>
                 
-                <label for="ano_fabricacao">Ano fabricação</label>
+                <label for="ano_fabricacao">Ano de fabricação</label>
                 <input type="number" id="ano_fabricacao" name="ano_fabricacao" required><br><br>
 
                 <label for="cor">Cor</label>
@@ -177,7 +177,7 @@
                    <tr>
                        <th>CHASSIS</th>
                        <th>Modelo</th>
-                       <th>Ano fabricação</th>
+                       <th>Ano de fabricação</th>
                        <th>Cor</th>
                        <th>Ações</th>
                    </tr>
@@ -188,6 +188,26 @@
            </table>
        </section>   
 
+        <!-- Seção editar veículo por CHASSIS -->
+        <section id="form-veiculo-modal" class="section-group-modal" style="display: none;">
+            <div class="modal-content">
+                <span class="close-button" onclick="fecharModalVeiculo()">&times;</span>
+                <h3>Editar veiculo</h3>
+                <form>                    
+                    <label for="novo_modelo">Novo modelo</label>
+                    <input type="text" id="novo_modelo" name="novo_modelo" required><br><br>
+                    
+                    <label for="novo_ano_fabricacao">Ano de fabricação</label>
+                    <input type="number" id="novo_ano_fabricacao" name="novo_ano_fabricacao" required><br><br>
+
+                    <label for="nova_cor">Nova cor</label>
+                    <input type="text" id="nova_cor" name="nova_cor" required><br><br>
+                    
+                    <button type="button" onclick="salvarEdicaoVeiculo()">Salvar</button>
+                    <button type="button" onclick="limparFormularioEdicaoModalVeiculo()">Limpar</button>
+                </form>
+            </div>
+        </section>
 
         <footer>
             <p>Designed by Camila Alves - 2024 &copy; Todos os direitos reservados.</p>
