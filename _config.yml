@@ -1,0 +1,6 @@
+# _config.yml (na raiz do projeto-sa-fabrica-veiculo)
+
+title: "Projeto SA Fábrica Veículo"
+description: "Documentação da API da Montadora Automotiva"
+baseurl: "/projeto-sa-fabrica-veiculo"
+url: "https://alvescamila87.github.io"

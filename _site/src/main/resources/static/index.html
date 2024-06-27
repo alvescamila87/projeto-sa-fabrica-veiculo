@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{site.baseurl}}/css/style.css">
+    <title>Montadora automotiva</title>
+</head>
+<body>
+        <header>
+            <h1>API Montadora automotiva</h1>
+        </header>
+        <nav>
+            <a href="#" onclick="showSection('form-peca-list'); listarPecas();">Listar peças</a>
+            <a href="#" onclick="showSection('form-peca-add')">Adicionar peça</a>
+            <a href="#" onclick="showSection('form-estoque-list'); listarEstoques();">Listar estoques</a>
+            <a href="#" onclick="showSection('form-estoque-add')">Adicionar estoque</a>
+            <a href="#" onclick="showSection('form-veiculo-list'); listarVeiculos();">Listar veículos</a>
+            <a href="#" onclick="showSection('form-veiculo-add');">Adicionar veículo</a>
+        </nav>
+
+        <!-- Seção adicionar peça -->
+        <section id="form-peca-add" class="section-group">
+            <h3>Cadastrar peça</h3>
+            <form>
+                <label for="nome">Nome da peça</label>
+                <input type="text" id="nome" name="nome" required><br><br>
+                
+                <label for="descricao">Descrição de peça</label>
+                <input type="text" id="descricao" name="descricao" required><br><br>
+                
+                <label for="quantidade">Quantidade de peças</label>
+                <input type="number" id="quantidade" name="quantidade" required><br><br>
+                
+                <button type="button" onclick="adicionarPeca()">Salvar</button>
+                <button type="button" onclick="limparFormulario()">Limpar</button>
+            </form>
+        </section>
+
+        <!-- Seção listar peças -->
+        <section id="form-peca-list"  class="section-group">
+             <!-- Seção pesquisar peça por ID -->
+            <h3>Pesquisar peça por ID</h3>
+            <form >
+                <input type="text" id="id_peca" name="id_peca" placeholder="Digite o ID da peça"><br><br>
+                <button type="button" onclick="pesquisarPeca()">Pesquisar</button>
+                <button type="button" onclick="limparPesquisa()">Limpar pesquisa</button>
+            </form>
+            <h3>Listagem de Peças</h3>
+            <table >
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Peça</th>
+                        <th>Descrição</th>
+                        <th>Quantidade</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="form-peca-list-tuples">
+                    <!-- Peças serão listados aqui -->
+                </tbody>
+            </table>
+        </section>      
+
+        <!-- Seção editar peça por ID -->
+        <section id="form-peca-modal" class="section-group-modal">
+            <div class="modal-content">
+                <span class="close-button" onclick="fecharModal()">&times;</span>
+                <h3>Editar peça</h3>
+                <form>
+                    <label for="novo-nome">Novo nome da peça:</label>
+                    <input type="text" id="novo-nome" name="novo-nome" required><br><br>
+                    
+                    <label for="nova-descricao">Nova descrição de peça:</label>
+                    <input type="text" id="nova-descricao" name="nova-descricao" required><br><br>
+                    
+                    <label for="nova-quantidade">Nova quantidade de peças:</label>
+                    <input type="number" id="nova-quantidade" name="nova-quantidade" required><br><br>
+                    
+                    <button type="button" onclick="salvarEdicaoPeca()">Salvar</button>
+                    <button type="button" onclick="limparFormularioEdicaoModal()">Limpar</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Seção adicionar estoque -->
+        <section id="form-estoque-add" class="section-group">
+            <h3>Cadastrar estoque</h3>
+            <form>
+                <label for="id_peca_estoque">ID Peca</label>
+                <input type="number" id="id_peca_estoque" name="id_peca_estoque" required><br><br> 
+                
+                <label for="quantidade_estoque">Quantidade disponível</label>
+                <input type="number" id="quantidade_estoque" name="quantidade_estoque" required><br><br>
+                
+                <button type="button" onclick="adicionarEstoque()">Salvar</button>
+                <button type="button" onclick="limparFormularioEstoque()">Limpar</button>
+            </form>
+        </section>
+
+         <!-- Seção listar estoques -->
+         <section id="form-estoque-list"  class="section-group">
+            <!-- Seção pesquisar estoque por ID -->
+           <h3>Pesquisar estoque por ID</h3>
+           <form >
+               <input type="text" id="id_estoque" name="id_estoque" placeholder="Digite o ID do estoque"><br><br>
+               <button type="button" onclick="pesquisarEstoque()">Pesquisar</button>
+               <button type="button" onclick="limparPesquisaEstoque()">Limpar pesquisa</button>
+           </form>
+           <h3>Listagem de Estoques</h3>
+           <table >
+               <thead>
+                   <tr>
+                       <th>ID</th>
+                       <th>Quantidade de peças disponível em estoque</th>
+                       <th>Ações</th>
+                   </tr>
+               </thead>
+               <tbody id="form-estoque-list-tuples">
+                   <!-- Estoques serão listados aqui -->
+               </tbody>
+           </table>
+       </section>   
+       
+        <!-- Seção editar estoque por ID -->
+        <section id="form-estoque-modal" class="section-group-modal">
+            <div class="modal-content">
+                <span class="close-button" onclick="fecharModalEstoque()">&times;</span>
+                <h3>Editar estoque</h3>
+                <form>
+                    <label for="novo_id_peca_estoque">Novo ID Peca</label>
+                     <input type="number" id="novo_id_peca_estoque" name="novo_id_peca_estoque" required><br><br> 
+                
+                    <label for="nova_quantidade_estoque">Nova quantidade disponível</label>
+                    <input type="number" id="nova_quantidade_estoque" name="nova_quantidade_estoque" required><br><br>    
+                    
+                    <button type="button" onclick="salvarEdicaoEstoque()">Salvar</button>
+                    <button type="button" onclick="limparFormularioEdicaoModalEstoque()">Limpar</button>
+                </form>
+            </div>
+        </section>
+
+         <!-- Seção adicionar veiculo -->
+         <section id="form-veiculo-add" class="section-group">
+            <h3>Cadastrar veículo</h3>
+            <form>
+                <label for="chassis">Chassis</label>
+                <input type="text" id="chassis" name="chassis" required><br><br>
+                
+                <label for="modelo">Modelo</label>
+                <input type="text" id="modelo" name="modelo" required><br><br>
+                
+                <label for="ano_fabricacao">Ano de fabricação</label>
+                <input type="number" id="ano_fabricacao" name="ano_fabricacao" required><br><br>
+
+                <label for="cor">Cor</label>
+                <input type="text" id="cor" name="cor" required><br><br>
+                
+                <button type="button" onclick="adicionarVeiculo()">Salvar</button>
+                <button type="button" onclick="limparFormularioVeiculo()">Limpar</button>
+            </form>
+        </section>
+
+         <!-- Seção listar veículos -->
+         <section id="form-veiculo-list"  class="section-group">
+            <!-- Seção pesquisar veículo por CHASSIS -->
+           <h3>Pesquisar veículo por CHASSIS</h3>
+           <form >
+               <input type="text" id="chassis_veiculo" name="chassis_veiculo" placeholder="Digite o CHASSIS do veículo"><br><br>
+               <button type="button" onclick="pesquisarVeiculo()">Pesquisar</button>
+               <button type="button" onclick="limparPesquisaVeiculo()">Limpar pesquisa</button>
+           </form>
+           <h3>Listagem de Veículos</h3>
+           <table >
+               <thead>
+                   <tr>
+                       <th>CHASSIS</th>
+                       <th>Modelo</th>
+                       <th>Ano de fabricação</th>
+                       <th>Cor</th>
+                       <th>Ações</th>
+                   </tr>
+               </thead>
+               <tbody id="form-veiculo-list-tuples">
+                   <!-- Veículos serão listados aqui -->
+               </tbody>
+           </table>
+       </section>   
+
+        <!-- Seção editar veículo por CHASSIS -->
+        <section id="form-veiculo-modal" class="section-group-modal">
+            <div class="modal-content">
+                <span class="close-button" onclick="fecharModalVeiculo()">&times;</span>
+                <h3>Editar veiculo</h3>
+                <form>                    
+                    <label for="novo_modelo">Novo modelo</label>
+                    <input type="text" id="novo_modelo" name="novo_modelo" required><br><br>
+                    
+                    <label for="novo_ano_fabricacao">Ano de fabricação</label>
+                    <input type="number" id="novo_ano_fabricacao" name="novo_ano_fabricacao" required><br><br>
+
+                    <label for="nova_cor">Nova cor</label>
+                    <input type="text" id="nova_cor" name="nova_cor" required><br><br>
+                    
+                    <button type="button" onclick="salvarEdicaoVeiculo()">Salvar</button>
+                    <button type="button" onclick="limparFormularioEdicaoModalVeiculo()">Limpar</button>
+                </form>
+            </div>
+        </section>
+
+        <footer>
+            <p>Designed by Camila Alves - 2024 &copy; Todos os direitos reservados.</p>
+        </footer>
+</body>
+<script src="{{site.baseurl}}/js/script.js"></script>
+</html>
